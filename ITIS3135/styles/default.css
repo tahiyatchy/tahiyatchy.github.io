@@ -9,7 +9,7 @@ h1, h2 {
 }
 nav li {
   list-style-type: none;
-  width: 25%
+  width: 25%;
   margin: 10px 50px;
   font-family: Verdana, Geneva, sans-serif;
   font-size: 24px;
@@ -38,7 +38,5 @@ footer {
 }
 .validation a{
   display: inline;
-  margin: auto 10%
-}
-
+  margin: auto 40px;
 }
