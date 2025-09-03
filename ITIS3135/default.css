@@ -1,0 +1,44 @@
+@font-face {
+  font-family: "Playfair-Display";
+  src: url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap");
+}
+h1, h2 {
+  font-family: "Playfair-Display", sans-serif;
+  text-align: center;
+  color: #075225;
+}
+nav li {
+  list-style-type: none;
+  width: 25%
+  margin: 10px 50px;
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 24px;
+}
+a {
+  color:#081c0d;
+  font-family: Verdana, Geneva, sans-serif;
+}
+a:visited{
+  color:#081c0d;
+}
+a:hover{
+  color:#2e5938;
+}
+p {
+  font-family: Verdana, Geneva, sans-serif;
+}
+body {
+  background-color: #075225;
+}
+footer {
+  background-color: #b9c7ba;
+}
+#acknowledgment {
+  color: #171616
+}
+.validation a{
+  display: inline;
+  margin: auto 10%
+}
+
+}
