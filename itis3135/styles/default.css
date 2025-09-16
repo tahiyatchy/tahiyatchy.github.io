@@ -30,6 +30,11 @@ body {
   margin: 0 20px;
 }
 
+.container {
+  margin: 0 auto;
+  padding: 20px;
+}
+
 header {
   background-color: var(--nav-bg);
   padding: 20px 0;
@@ -45,15 +50,21 @@ header .container {
   align-items: center;
 }
 
+img{
+  max-height: 50vh;
+  aspect-ratio: 5 / 4;
+  align-items: center;
+}
+
 h1 {
-  font-size: 2.2rem;
-  font-weight: 700;
-  margin-bottom: 20px;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
   font-family: "Playfair Display", serif;
   text-align: center;
   color: var(--light-text);
   margin-bottom: 15px;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 h2 {
@@ -77,12 +88,6 @@ h2::after {
   width: 80px;
   height: 3px;
   background-color: var(--secondary-color);
-}
-
-img{
-  max-height: 50vh;
-  aspect-ratio: 5 / 4;
-  align-items: center;
 }
 
 #primary-nav {
