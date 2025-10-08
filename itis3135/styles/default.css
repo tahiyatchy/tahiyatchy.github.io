@@ -131,6 +131,49 @@ nav li a:hover {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
+/* Secondary navigation styles */
+#secondary-nav {
+  margin: 20px 0;
+  padding: 15px 0;
+  border-top: 2px solid var(--secondary-color);
+  border-bottom: 2px solid var(--secondary-color);
+}
+
+#secondary-nav ul {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  list-style: none;
+}
+
+#secondary-nav li {
+  margin: 0;
+}
+
+#secondary-nav a:link,
+#secondary-nav a:visited {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: var(--accent-color);
+  color: var(--text-color) !important;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  border: 1px solid var(--secondary-color);
+}
+
+#secondary-nav a:hover,
+#secondary-nav a:active {
+  background-color: var(--secondary-color);
+  color: var(--light-text) !important;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
 .content-card {
   background-color: var(--card-bg);
   border-radius: 12px;
@@ -290,6 +333,20 @@ main {
     font-size: 16px;
     width: 200px;
     text-align: center;
+  }
+  
+  /* Secondary nav mobile styles */
+  #secondary-nav ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  #secondary-nav a:link,
+  #secondary-nav a:visited {
+    width: 200px;
+    text-align: center;
+    font-size: 14px;
   }
   
   .content-card {
