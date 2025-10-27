@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Cinema for Hobbyists</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
+
+            body {
+                background-color: #1a1a2e;
+                margin: 0;
+                padding: 0;
+                font-family: "Playfair Display", serif;
+                line-height: 1.6;
+                color: #e6e6e6;
+            }
+
+            header {
+                background-color: #16213e;
+                padding: 1.5rem 0;
+                border-bottom: 3px solid #e94560;
+            }
+
+            nav {
+                max-width: 800px;
+                margin: 0 auto;
+                display: flex;
+                justify-content: center;
+                gap: 2rem;
+                flex-wrap: wrap;
+            }
+
+            nav a {
+                color: #e6e6e6;
+                text-decoration: none;
+                font-family: Montserrat, sans-serif;
+                font-weight: 500;
+                padding: 0.5rem 1rem;
+                border-radius: 4px;
+                transition: all 0.3s ease;
+            }
+
+            nav a:hover {
+                background-color: #e94560;
+                color: #16213e;
+            }
+
+            main {
+                padding: 2rem;
+                min-height: 80vh;
+            }
+
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+            }
+
+            .section {
+                display: none;
+                animation: fadeIn 0.5s ease-in;
+            }
+
+            .section.active {
+                display: block;
+            }
+
+                footer {
+        background-color: #16213e;
+        color: #a9b7d0;
+        padding: 2rem 0;
+        margin-top: 3rem;
+        border-top: 3px solid #e94560;
+        text-align:center;
+    }
+
+    .footer-container {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+        font-family: Montserrat, sans-serif;
+    }
+
+    .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        flex-wrap: wrap;
+        margin-top: 1rem;
+    }
+
+            h1 {
+                font-size: 3rem;
+                padding-bottom: 0.5rem;
+                font-weight: 600;
+                line-height: 1.3;
+                margin-bottom: 2rem;
+                color: #e94560;
+                text-align: center;
+                font-style: italic;
+            }
+
+            h2 {
+                font-size: 2rem;
+                margin-top: 2rem;
+                color: #e94560;
+                font-weight: 600;
+                line-height: 1.3;
+                margin-bottom: 1.5rem;
+                text-align: center;
+                border-bottom: 2px solid #0f3460;
+                padding-bottom: 0.5rem;
+            }
+
+            h3 {
+                color: #e94560;
+                font-weight: 600;
+                line-height: 1.3;
+                margin-bottom: 1rem;
+            }
+
+            p {
+                margin-bottom: 1.5rem;
+                font-family: Montserrat, sans-serif;
+            }
+
+            a {
+                color: #ffacbe;
+                text-decoration: none;
+                font-weight: 500;
+                border-bottom: 1px solid transparent;
+                transition: all 0.2s ease-in-out;
+            }
+
+            a:hover {
+                color: #ffffff;
+                border-bottom-color: #e94560;
+            }
+
+            img {
+                width: auto;
+                max-height: 350px;
+                max-width: 600px;
+                display: block;
+                margin: 1rem auto;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            }
+
+            figure {
+                margin: 2rem 0;
+                padding: 1rem;
+                background-color: #0f3460;
+                border-radius: 8px;
+            }
+
+            figcaption {
+                font-style: italic;
+                color: #a9b7d0;
+                margin-top: 0.5rem;
+                font-size: 0.9rem;
+                text-align: center;
+                font-family: Montserrat, sans-serif;
+            }
+
+            .divider {
+                text-align: center;
+                font-size: 2rem;
+                margin: 2rem 0;
+                color: #e94560;
+            }
+
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <a href="#" onclick="showSection('what')">Cinema as a Hobby ★</a>
+                <a href="#" onclick="showSection('who')">About Me ★</a>
+                <a href="#" onclick="showSection('when')">When to Watch ★</a>
+                <a href="#" onclick="showSection('where')">Where to Watch ★</a>
+                <a href="#" onclick="showSection('how')">How to Become a Cinephile ★</a>
+                <a href="#" onclick="showSection('why')">Why Cinema? ★</a>
+                <a href="#" onclick="showSection('ai')">AI Prompts ★</a>
+            </nav>
+        </header>
+        <main>
+            <div class="container">
+                <section id="what" class="section active">
+                    <h1>Cinema for Hobbyists</h1>
+                    <h2>Watching movies? A hobby?</h2>
+                    <figure>
+                        <img src="images/coolidge_corner.jpg" alt="The Coolidge Corner Theatre at night">
+                        <figcaption>Going to the famous Coolidge Corner Theatre in Boston, 2025</figcaption>
+                    </figure>
+                    <p>
+                        Well yes! What separates a hobby from a simple act of leisure? Skill? I certainly can't imagine many people arguing that one had to be proficient or exceptional at something to have a hobby. Quite the opposite, in fact. Could it be effort or commitment? The ability to improve? The fact is that hobbies <em>are</em> acts of leisure, and one person's idle passtime is another's commitment to observing one of the most ubiquitous art forms of the contemporary era.
+                    </p>
+                    <p>
+                        So what does cinema as a hobby even look like? For one, hobbyists tend to see more movies with greater varieties through engaging with cinema actively. There is usually some kind of study involved, whether it's of the technical feats of films or their conveyed message or the two in tandem, or even situating a film in a particular artistic or political climate or movement.
+                    </p>
+                    <div class="divider">★</div>
+                    <p>
+                        Cinema as a hobby transforms passive viewing into an active exploration of art, culture, and human experience. It's about developing a critical eye and emotional intelligence through visual storytelling.
+                    </p>
+                </section>
+
+                <section id="who" class="section">
+                    <h2>About Me</h2>
+                    <figure>
+                        <img src="images/letterboxd.png" alt="a letterboxd profile for tahiyat">
+                        <figcaption>My letterboxd home page, 2025</figcaption>
+                    </figure>
+                    <p>
+                        I started approaching cinema as a hobbyist when I realized that not only could I could watch movies with my brain turned on, but also that I could use them as a small model of the social, cultural, and political climates of the time they were made. It wouldn't be true to say a film ever substantially changed the world in any significant political sense; but it has given filmmakers and audiences alike a new means for making sense of the world around them.
+                    </p>
+                    <p>
+                        I still consider myself to be a developing cinephile, and self-made in a way. My family doesn't really watch movies and neither of the countries or cultures I'm from have really produced many films with the intention of creating art. My favourite movie is <em>The Dreamers</em> (2003) because I find the premise hysterical and cathartic as a satire of student politics in the West and the predisposition that film people have towards moral degeneracy.
+                    </p>
+                    <div class="divider">★</div>
+                    <p>
+                        The purpose of film, especially more independent cinema, is to transgress on what is socially acceptable; I believe that film (and media in general) and all aspects of culture are in a positive feedback loop, exacerbating one another's transgression.
+                    </p>
+                </section>
+
+                <section id="when" class="section">
+                    <h2>The Best Time for Cinema</h2>
+                    <figure>
+                        <img src="images/oscar.jpg" alt="oscar ballot">
+                        <figcaption>Oscar's Themed Staging, <a href="https://unsplash.com/photos/a-close-up-of-a-persons-hand-holding-a-remote-control-95c0ZPjiHy4">Unsplash</a></figcaption>
+                    </figure>
+                    <p>
+                        Good movies are released year-round. With that said, the worst time for a movie to be released is in the spring, fresh off of Oscars season. Good films have been released in the spring, but it can often be a bad sign as it has long been the dumping ground of the calendar year for studios.
+                    </p>
+                    <p>
+                        The best time of year for new releases is often the fall. While the fall and winter are notoriously a time for Oscar-bait film releases, many independent films also release in the fall. October especially is a great time for horror movies, and not just new releases---it's a great time for horror classic rewatches and catching special screening in theatres!
+                    </p>
+                    <div class="divider">★</div>
+                    <p>
+                        Zooming in a bit, there is definitely a best time of day to go to the cinema. Believe it or not, it isn't after dark. Many theatres have reduced ticket prices for matinee or daytime showings, making a daytime movie an economical choice. At home, nighttime still reigns supreme. It's a lot easier to see the screen after dark, and it's a great way to end the day.
+                    </p>
+                </section>
+
+                <section id="where" class="section">
+                    <h2>Where to Watch</h2>
+                    <figure>
+                        <img src="images/iph_tickets.jpg" alt="Movie tickets collection">
+                        <figcaption>All but one of my tickets to the Independent Picture House in August and September, 2025</figcaption>
+                    </figure>
+                    <p>
+                        From University City (besides the very fickle Union Theater in the Student Union) there are three nearby options for going to the cinema. One is the AMC in Concord Mills, which is about a 10-15 minute drive from campus, another is Regal Starlight, which is satisfactory but doesn't screen the full Regal offerings, and the third is my favorite: The Independent Picture House near the Sugar Creek lightrail station.
+                    </p>
+                    <p>
+                        If you have the means to go a little farther, Regal Stonecrest at Piper Glenn has the full Regal Cinemas catalog and the Ayrsley Grand Cinema often runs seasonal promotions on screenings of older movies.
+                    </p>
+                    <div class="divider">★</div>
+                    <p>
+                        On the streaming side of things, the Criterion Channel is a great subscription to invest in if you're really into movies. It's $11 a month for a selection of critically acclaimed movies from all over the world, and it's always being updated. A free, underrated option is Tubi, which has a surprisingly wide selection of movies with ads. For university students, it's very likely there are many movies available through your university database and in DVD format. For everyone with access to a public library, a library card may come with a wide selection of movies on sites like Kanopy.
+                    </p>
+                </section>
+
+                <section id="how" class="section">
+                    <h2>How to Engage with Cinema as a Cinephile</h2>
+                    <figure>
+                        <img src="images/projector.jpg" alt="A projector image on a bedroom wall of a woman's face">
+                        <figcaption>
+                            Watching <em>The Stepford Wives</em> (1975) on a projector in my bedroom, 2025
+                        </figcaption>
+                    </figure>
+                    <p>
+                        A film is like any other art exhibit; there is a wealth of information for those who know how to look, and there may be absolutely nothing for those who don't.
+                    </p>
+                    <p>
+                        Start by paying attention to cinematography - the way scenes are framed, lit, and composed. Notice camera movements, color palettes, and visual motifs that recur throughout the film. These elements often carry symbolic meaning and contribute to the overall emotional impact.
+                    </p>
+                    <div class="divider">★</div>
+                    <p>
+                        Keep a viewing journal or use platforms like Letterboxd to record your thoughts. Analyze character development, narrative structure, and thematic elements. Consider the historical and cultural context of when the film was made, and how it reflects or comments on its time period.
+                    </p>
+                </section>
+
+                <section id="why" class="section">
+                    <h2>Why Cinema Matters</h2>
+                    <figure>
+                        <img src="images/ifc_center.jpg" alt="A sign for The IFC Center">
+                        <figcaption>
+                            Exiting the New York City subway near the IFC Center, 2024
+                        </figcaption>
+                    </figure>
+                    <p>
+                        Cinema matters because it serves as both a mirror and a window - reflecting our own experiences while allowing us to see through others' eyes. It builds empathy across cultures, generations, and circumstances, helping us understand perspectives we might never encounter in our daily lives.
+                    </p>
+                    <p>
+                        Great films preserve moments in time, capturing the anxieties, hopes, and dreams of their era. They become cultural artifacts that future generations can study to understand what mattered to people, what frightened them, and what inspired them during specific historical periods.
+                    </p>
+                    <div class="divider">★</div>
+                    <p>
+                        On a personal level, engaging deeply with cinema develops critical thinking skills, emotional intelligence, and visual literacy. It teaches us to read subtext, recognize patterns, and appreciate the complex interplay of technical craft and artistic vision that brings stories to life on screen.
+                    </p>
+                </section>
+            </div>
+            <section id="ai" class="section">
+        <h2>AI Prompts</h2>
+        <div class="prompt-list">
+            <p>The generative model used for this site is Deepseek.</p>
+            <div class="prompt-item">
+                <h3>Prompt 1:</h3>
+                <p>"Adjust the design in the attached file by implementing a cinema-themed color palette (attached: index.html)"</p>
+        </div>
+        <div class="prompt-item">
+            <h3>Prompt 2:</h3>
+            <p>"Write a style selector for the footer"</p>
+        </div>
+        <div class="prompt-item">
+            <h3>Prompt 3:</h3>
+            <p>"Suggest code adjustments for a smoother navigation"</p>
+        </div>
+    </div>
+</section>
+        </main>
+        <footer>
+            <div class="validation-links">
+                <a href="https://validator.w3.org/check?uri=referer" target="_blank">HTML Validation</a> |
+                <a href="https://jigsaw.w3.org/css-validator/check/referer" target="_blank">CSS Validation</a> |
+                <a href="https://wave.webaim.org/report#/https://webpages.charlotte.edu/tchy/itis3135/hobby/index.html" target="_blank">Accessibility Check</a>
+            </div>
+            <p id="acknowledgement">
+                Designed by <a href="https://webpages.charlotte.edu/tchy/itis3135/chydesigned.com" title="ChyDesigned">ChyDesigned Ltd. ©2025</a>
+            </p>
+        </footer>
+        <script>
+            function showSection(sectionId) {
+                document.querySelectorAll('.section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById(sectionId).classList.add('active');
+            }
+        </script>
+    </body>
+</html>
