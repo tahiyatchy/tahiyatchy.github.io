@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ITIS 3135 | Tahiyat Chy's | Thorny Chimaera | Introduction Form</title>
+    <link rel="stylesheet" href="styles/default.css">
+    <script src="https://lint.page/kit/4d0fe3.js" crossorigin="anonymous"></script>
+    <style>
+        form {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        input, textarea {
+            border-radius: 4px;
+            font-family: inherit;
+            width:100%;
+        }
+        
+        .required::after {
+            content: " *";
+            color: red;
+        }
+        
+        .optional {
+            color: #666;
+            font-style: italic;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        button[type="reset"] {
+            background-color: #f44336;
+            color: white;
+        }
+        
+        button[type="button"] {
+            background-color: #2196F3;
+            color: white;
+        }
+        
+        .course-entry {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+        
+        .course-entry input {
+            flex: 1;
+        }
+        
+        .delete-course {
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        
+        #add-course {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 15px;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+        
+        #result {
+            display: none;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        #reset-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #2196F3;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        /* Simple Date Selector Styles */
+.simple-date-selector {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.date-select {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+    font-family: inherit;
+    min-width: 100px;
+}
+
+.date-select:focus {
+    border-color: #2196F3;
+    outline: none;
+}
+
+.selected-date-display {
+    margin-top: 8px;
+    padding: 8px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #666;
+    border: 1px dashed #ddd;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    .simple-date-selector {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .date-select {
+        min-width: auto;
+        width: 100%;
+    }
+}
+    </style>
+</head>
+<body>
+    <header data-include="components/header.html"></header>
+    
+    <main>
+        <h2>Introduction Form</h2>
+        <h3 id="form-instructions">Please submit the form below to create your own introduction page.</h3>
+        
+        <form id="intro-form">
+            <!-- Personal Information -->
+            <div class="form-group">
+                <label for="first-name" class="required">First Name</label>
+                <input type="text" id="first-name" name="first-name" placeholder="Enter your first name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="middle-name" class="optional">Middle Name (or Initial)</label>
+                <input type="text" id="middle-name" name="middle-name" placeholder="Enter your middle name (optional)">
+            </div>
+            
+            <div class="form-group">
+                <label for="nickname" class="optional">Nickname/Preferred Name</label>
+                <input type="text" id="nickname" name="nickname" placeholder="Enter your nickname (optional)">
+            </div>
+            
+            <div class="form-group">
+                <label for="last-name" class="required">Last Name</label>
+                <input type="text" id="last-name" name="last-name" placeholder="Enter your last name" required>
+            </div>
+            
+            <!-- Acknowledgment -->
+            <div class="form-group">
+                <label for="acknowledgment" class="required">Acknowledgment Statement</label>
+                <input type="text" id="acknowledgment" name="acknowledgment" placeholder="Enter acknowledgment statement" required value="I understand that what is on this page is not password protected and I will not put anything here that I don’t want publicly available.">
+            </div>
+            
+            <div id="date" class="form-group">
+                <label for="date-month" class="required">Acknowledgment Date</label>
+        <!-- Month Dropdown -->
+        <select id="date-month" class="date-select" required>
+            <option value="">Month</option>
+            <option value="01">January</option>
+            <option value="02">February</option>
+            <option value="03">March</option>
+            <option value="04">April</option>
+            <option value="05">May</option>
+            <option value="06">June</option>
+            <option value="07">July</option>
+            <option value="08">August</option>
+            <option value="09">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+        </select>
+        
+        <!-- Day Dropdown -->
+        <select id="date-day" class="date-select" required>
+            <option value="">Day</option>
+            <!-- Days 1-31 will be populated by JavaScript -->
+        </select>
+        
+        <!-- Year Dropdown -->
+        <select id="date-year" class="date-select" required>
+            <option value="">Year</option>
+            <!-- Years will be populated by JavaScript -->
+        </select>
+        
+        <!-- Hidden input to store the final date value -->
+        <input type="hidden" id="acknowledgment-date" name="acknowledgment-date">
+        
+        <!-- Display selected date -->
+        <div id="selected-date-display" class="selected-date-display">
+            No date selected
+        </div>
+            </div>
+            
+            <!-- Mascot -->
+            <div class="form-group">
+                <label for="mascot-adjective" class="required">Mascot Adjective</label>
+                <input type="text" id="mascot-adjective" name="mascot-adjective" placeholder="Enter mascot adjective" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="mascot-animal" class="required">Mascot Animal</label>
+                <input type="text" id="mascot-animal" name="mascot-animal" placeholder="Enter mascot animal" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="divider" class="required">Divider</label>
+                <input type="text" id="divider" name="divider" placeholder="Enter divider symbol" required value="|">
+            </div>
+            
+            <!-- Picture -->
+            <div class="form-group">
+                <label for="picture" class="required">Picture</label>
+                <input type="file" id="picture" name="picture" accept="image/*">
+                <small>Current default: scenery-course-cover.jpeg</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="picture-caption" class="required">Picture Caption</label>
+                <input type="text" id="picture-caption" name="picture-caption" placeholder="Enter picture caption" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="picture-source" class="required">Picture Source</label>
+                <input type="url" id="picture-source-url" name="picture-source-url" placeholder="Enter picture source URL" required>
+                <input type="text" id="picture-source" name="picture-source" placeholder="Enter picture source name">
+            </div>
+            
+            <!-- Personal Statement -->
+            <div class="form-group">
+                <label for="personal-statement" class="required">Personal Statement</label>
+                <textarea id="personal-statement" name="personal-statement" rows="5" placeholder="Enter your personal statement" required>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</textarea>
+            </div>
+            
+            <!-- Main Bullets -->
+            <div class="form-group">
+                <label for="personal-background" class="required">Personal Background</label>
+                <textarea id="personal-background" name="personal-background" rows="3" placeholder="Enter your personal background" required> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="academic-background" class="required">Academic Background</label>
+                <textarea id="academic-background" name="academic-background" rows="3" placeholder="Enter your academic background" required>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</textarea>
+            </div>
+            
+            <!-- Courses -->
+            <div class="form-group">
+                <label class="required">Courses</label>
+                <button type="button" id="add-course">Add Course</button>
+                
+                <div id="courses-container">
+                    <div class="course-entry">
+                        <input type="text" name="course-dept" placeholder="Department (e.g., ITIS)" value="ITIS" required>
+                        <input type="text" name="course-number" placeholder="Number (e.g., 3135)" value="3135" required>
+                        <input type="text" name="course-name" placeholder="Course Name" value="Front-End Web App Development" required>
+                        <input type="text" name="course-reason" placeholder="Reason for taking" value="fulfills technical elective requirement; a skill I'd like to develop for my own projects" required>
+                        <button type="button" class="delete-course">Delete</button>
+                    </div>
+                    <div class="course-entry">
+                        <input type="text" name="course-dept" placeholder="Department (e.g., AMST)" value="AMST" required>
+                        <input type="text" name="course-number" placeholder="Number (e.g., 3090)" value="3090" required>
+                        <input type="text" name="course-name" placeholder="Course Name" value="Politics and Conflict in American Horror & Sci-Fi Film" required>
+                        <input type="text" name="course-reason" placeholder="Reason for taking" value="the perfect intersection of my greatest interests" required>
+                        <button type="button" class="delete-course">Delete</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Buttons -->
+            <div class="button-group">
+                <button type="submit">Submit</button>
+                <button type="reset">Reset</button>
+                <button type="button" id="clear-button">Clear</button>
+            </div>
+        </form>
+        
+        <!-- Result Display Area -->
+        <div id="result"></div>
+    </main>
+    
+    <footer data-include="components/footer.html"></footer>
+    
+    <script src="scripts/introduction.js"></script>
+    <script src="scripts/HTMLinclude.js"></script>
