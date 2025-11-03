@@ -6,11 +6,32 @@ function validateForm(formData) {
         alert('Please select a valid date');
         return false;
     }
-    if (!formData.firstName || !formData.lastName || !formData.acknowledgment || 
+    
+    // Basic validation for required fields
+    if (!formData.firstName || !formData.lastName || 
         !formData.mascotAdjective || !formData.mascotAnimal || 
-        !formData.divider || !formData.pictureCaption || !formData.pictureSourceURL || 
+        !formData.divider || !formData.pictureCaption || 
         !formData.personalStatement || !formData.personalBackground || !formData.academicBackground) {
+        alert("Please fill in all required fields.");
         return false;
+    }
+    
+    // Check if at least one course is added
+    const courseEntries = document.querySelectorAll(".course-entry");
+    if (courseEntries.length === 0) {
+        alert("Please add at least one course.");
+        return false;
+    }
+    
+    // Validate each course has all fields
+    for (let entry of courseEntries) {
+        const inputs = entry.querySelectorAll("input");
+        for (let input of inputs) {
+            if (!input.value.trim()) {
+                alert("Please fill in all course fields.");
+                return false;
+            }
+        }
     }
     
     return true;
@@ -59,7 +80,6 @@ function generateIntroduction() {
     
     // Validate required fields
     if (!validateForm(formData)) {
-        alert("Please fill in all required fields.");
         return;
     }
 
@@ -99,6 +119,8 @@ function resetForm() {
     document.getElementById("result").style.display = "none";
     document.getElementById("intro-form").style.display = "block";
     document.getElementById("form-instructions").style.display = "block";
+    // Reset the H2 title back to "Introduction Form"
+    document.querySelector("main h2").textContent = "Introduction Form";
 }
 
 // Simple Date Selector Functionality
