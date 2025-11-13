@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Learning - Ethical Research Resource</title>
+    <link rel="stylesheet" href="styles/default.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-brand">
+                <h1>Ethical Research Resource</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="learn.html">Learn</a></li>
+                <li><a href="test.html">Test</a></li>
+                <li><a href="interactive.html" class="active">Interactive</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h2>Interactive Learning</h2>
+        <div class="module-grid">
+            <div class="module-card" onclick="startScenario()">
+                <h3>Ethical Scenarios</h3>
+                <p>Explore real-world ethical dilemmas and make decisions.</p>
+            </div>
+            <div class="module-card" onclick="startResearchAssessment()">
+                <h3>Assess My Research</h3>
+                <p>Evaluate your research methodology for ethical compliance.</p>
+            </div>
+        </div>
+
+        <!-- Enhanced Scenario Container -->
+        <div id="scenario-container" class="scenario-container hidden">
+            <div id="scenario-text" class="scenario-text"></div>
+            <div id="scenario-choices" class="scenario-choices"></div>
+            <div id="scenario-feedback" class="scenario-feedback hidden"></div>
+            <div class="scenario-controls">
+                <button id="scenario-restart" class="btn hidden">Choose Another Scenario</button>
+                <button id="scenario-reset" class="btn secondary hidden">Restart This Scenario</button>
+            </div>
+        </div>
+
+        <!-- Research Assessment Container -->
+        <div id="research-container" class="research-container hidden">
+            <div id="research-progress"></div>
+            <div id="research-question"></div>
+            <div id="research-options" class="research-options"></div>
+            <button id="research-next" class="btn hidden">Next Question</button>
+            <div id="research-result" class="research-result hidden"></div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Ethical Research Resource. For educational purposes.</p>
+            <div class="validator-links">
+                <a href="https://validator.w3.org/" target="_blank" aria-label="HTML Validator">HTML Validator</a>
+                <a href="https://jigsaw.w3.org/css-validator/" target="_blank" aria-label="CSS Validator">CSS Validator</a>
+                <a href="https://wave.webaim.org/" target="_blank" aria-label="Accessibility Checker">Accessibility Checker</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/include.js"></script>
+</body>
+</html>

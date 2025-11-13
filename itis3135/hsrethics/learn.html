@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Modules - Ethical Research Resource</title>
+    <link rel="stylesheet" href="styles/default.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-brand">
+                <h1>Ethical Research Resource</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="project_overview.html">This Initiative</a></li>
+                <li><a href="learn.html">Learn</a></li>
+                <li><a href="test.html">Test</a></li>
+                <li><a href="interactive.html">Interactive</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h2>Learning Modules</h2>
+        <div class="module-grid">
+            <div class="module-card" onclick="showContent('belmont-content')">
+                <h3>Belmont Report</h3>
+                <p>Understand the ethical principles of Respect for Persons, Beneficence, and Justice.</p>
+            </div>
+            <div class="module-card" onclick="showContent('coi-content')">
+                <h3>Conflicts of Interest</h3>
+                <p>Learn to identify and manage conflicts of interest in research.</p>
+            </div>
+            <div class="module-card" onclick="showContent('irb-content')">
+                <h3>IRB Regulations and Review</h3>
+                <p>Comprehensive guide to Institutional Review Board processes.</p>
+            </div>
+            <div class="module-card" onclick="showContent('data-content')">
+                <h3>Data Handling and Privacy</h3>
+                <p>Best practices for data management and participant privacy.</p>
+            </div>
+        </div>
+
+        <!-- Learning Content Sections -->
+        <div id="belmont-content" class="content-section hidden">
+            <h3>The Belmont Report</h3>
+            <div class="principle">
+                <h4>Respect for Persons</h4>
+                <p>Recognizing the autonomy of individuals and protecting those with diminished autonomy.</p>
+            </div>
+            <div class="principle">
+                <h4>Beneficence</h4>
+                <p>Maximizing benefits and minimizing harms to research participants.</p>
+            </div>
+            <div class="principle">
+                <h4>Justice</h4>
+                <p>Ensuring fair distribution of the benefits and burdens of research.</p>
+            </div>
+        </div>
+
+        <div id="coi-content" class="content-section hidden">
+            <h3>Conflicts of Interest</h3>
+            <p>A conflict of interest exists when professional judgment concerning a primary interest may be unduly influenced by a secondary interest.</p>
+            <ul>
+                <li>Financial conflicts</li>
+                <li>Personal relationships</li>
+                <li>Academic pressures</li>
+                <li>Institutional loyalties</li>
+            </ul>
+        </div>
+
+        <div id="irb-content" class="content-section hidden">
+            <h3>IRB Regulations and Review</h3>
+            <p>Institutional Review Boards ensure that research involving human subjects is conducted ethically.</p>
+            <div class="review-level">
+                <h4>Exempt Review</h4>
+                <p>Minimal risk research that qualifies for exemption from full IRB review.</p>
+            </div>
+            <div class="review-level">
+                <h4>Expedited Review</h4>
+                <p>Minimal risk research that doesn't qualify for exemption but can be reviewed by one IRB member.</p>
+            </div>
+            <div class="review-level">
+                <h4>Full Board Review</h4>
+                <p>Research involving more than minimal risk requires review by the full IRB committee.</p>
+            </div>
+        </div>
+
+        <div id="data-content" class="content-section hidden">
+            <h3>Data Handling and Privacy</h3>
+            <p>Proper data management is essential for protecting participant confidentiality and research integrity.</p>
+            <ul>
+                <li>Data encryption standards</li>
+                <li>Secure storage protocols</li>
+                <li>Data retention policies</li>
+                <li>De-identification procedures</li>
+            </ul>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Ethical Research Resource. For educational purposes.</p>
+            <div class="validator-links">
+                <a href="https://validator.w3.org/" target="_blank" aria-label="HTML Validator">HTML Validator</a>
+                <a href="https://jigsaw.w3.org/css-validator/" target="_blank" aria-label="CSS Validator">CSS Validator</a>
+                <a href="https://wave.webaim.org/" target="_blank" aria-label="Accessibility Checker">Accessibility Checker</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/include.js"></script>
+</body>
+</html>

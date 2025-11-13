@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowledge Assessment - Ethical Research Resource</title>
+    <link rel="stylesheet" href="styles/default.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-brand">
+                <h1>Ethical Research Resource</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="project_overview.html">This Initiative</a></li>
+                <li><a href="learn.html">Learn</a></li>
+                <li><a href="test.html">Test</a></li>
+                <li><a href="interactive.html">Interactive</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h2>Knowledge Assessment</h2>
+        <div class="module-grid">
+            <div class="module-card" onclick="startQuiz('belmont')">
+                <h3>Belmont Report Quiz</h3>
+                <p>Test your understanding of the Belmont Report principles.</p>
+            </div>
+            <div class="module-card" onclick="startQuiz('coi')">
+                <h3>Conflicts of Interest Quiz</h3>
+                <p>Assess your knowledge of conflict of interest management.</p>
+            </div>
+            <div class="module-card" onclick="startQuiz('irb')">
+                <h3>IRB Regulations Quiz</h3>
+                <p>Evaluate your understanding of IRB requirements.</p>
+            </div>
+            <div class="module-card" onclick="startQuiz('data')">
+                <h3>Data Handling Quiz</h3>
+                <p>Test your knowledge of data privacy and management.</p>
+            </div>
+        </div>
+
+        <!-- Quiz Container -->
+        <div id="quiz-container" class="quiz-container hidden">
+            <div id="quiz-progress"></div>
+            <div id="quiz-question"></div>
+            <div id="quiz-options" class="quiz-options"></div>
+            <button id="quiz-next" class="btn hidden">Next Question</button>
+            <div id="quiz-result" class="quiz-result hidden"></div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Ethical Research Resource. For educational purposes.</p>
+            <div class="validator-links">
+                <a href="https://validator.w3.org/" target="_blank" aria-label="HTML Validator">HTML Validator</a>
+                <a href="https://jigsaw.w3.org/css-validator/" target="_blank" aria-label="CSS Validator">CSS Validator</a>
+                <a href="https://wave.webaim.org/" target="_blank" aria-label="Accessibility Checker">Accessibility Checker</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/include.js"></script>
+</body>
+</html>
