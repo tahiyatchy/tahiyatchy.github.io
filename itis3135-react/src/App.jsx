@@ -4,6 +4,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Introduction from './pages/Introduction';
 import Contract from './pages/Contract';
+import Classmates from './pages/Classmates'; // Add this import
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -15,6 +16,8 @@ function App() {
       setCurrentPage('introduction');
     } else if (path.includes('contract.html') || path === '/contract') {
       setCurrentPage('contract');
+    } else if (path.includes('classmates.html') || path === '/classmates') { // Add this condition
+      setCurrentPage('classmates');
     } else {
       setCurrentPage('home');
     }
@@ -26,6 +29,8 @@ function App() {
         setCurrentPage('introduction');
       } else if (newPath.includes('contract.html') || newPath === '/contract') {
         setCurrentPage('contract');
+      } else if (newPath.includes('classmates.html') || newPath === '/classmates') { // Add this condition
+        setCurrentPage('classmates');
       } else {
         setCurrentPage('home');
       }
@@ -45,6 +50,8 @@ function App() {
         return <Introduction />;
       case 'contract':
         return <Contract />;
+      case 'classmates': // Add this case
+        return <Classmates />;
       default:
         return <Home />;
     }

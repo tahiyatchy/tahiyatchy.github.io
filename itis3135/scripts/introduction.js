@@ -1,3 +1,4 @@
+
 // Function declarations (moved to top to avoid "used before defined" errors)
 function validateForm(formData) {
     // Check if date is selected
@@ -123,6 +124,41 @@ function resetForm() {
     document.querySelector("main h2").textContent = "Introduction Form";
 }
 
+// Function to autofill the form with sample data
+function autofillForm() {
+    // Personal Information
+    document.getElementById("first-name").value = "John";
+    document.getElementById("middle-name").value = "Alexander";
+    document.getElementById("nickname").value = "Johnny";
+    document.getElementById("last-name").value = "Doe";
+    
+    // Mascot
+    document.getElementById("mascot-adjective").value = "Majestic";
+    document.getElementById("mascot-animal").value = "Eagle";
+    
+    // Picture information
+    document.getElementById("picture-caption").value = "Beautiful mountain landscape";
+    document.getElementById("picture-source-url").value = "https://example.com/image.jpg";
+    document.getElementById("picture-source").value = "Example Images";
+    
+    // Personal statements
+    document.getElementById("personal-statement").value = "I am a passionate web developer with over 5 years of experience in creating dynamic and responsive web applications. I love learning new technologies and solving complex problems.";
+    document.getElementById("personal-background").value = "I was born and raised in Charlotte, NC. In my free time, I enjoy hiking, photography, and playing guitar.";
+    document.getElementById("academic-background").value = "I have a Bachelor's degree in Computer Science from UNC Charlotte and currently pursuing a Master's degree in Software Engineering.";
+    
+    // Update date to today
+    const today = new Date();
+    document.getElementById('date-month').value = (today.getMonth() + 1).toString().padStart(2, '0');
+    document.getElementById('date-day').value = today.getDate().toString().padStart(2, '0');
+    document.getElementById('date-year').value = today.getFullYear();
+    
+    // Trigger date update
+    const event = new Event('change');
+    document.getElementById('date-month').dispatchEvent(event);
+    
+    alert("Form autofilled with sample data! You can now test the Generate HTML and Generate JSON buttons.");
+}
+
 // Simple Date Selector Functionality
 function initializeSimpleDateSelector() {
     const monthSelect = document.getElementById('date-month');
@@ -243,4 +279,8 @@ document.addEventListener('DOMContentLoaded', function() {
             coursesContainer.removeChild(button.parentElement);
         });
     });
+    
+    // Add autofill button functionality
+    const autofillButton = document.getElementById("autofill-button");
+    autofillButton.addEventListener("click", autofillForm);
 });

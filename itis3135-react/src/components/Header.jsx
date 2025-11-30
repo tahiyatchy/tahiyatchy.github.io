@@ -11,7 +11,8 @@ const Header = ({ onNavigate }) => {
       const href = link.getAttribute('href');
       if ((href === '/' && path === '/') ||
           (href === 'introduction.html' && path.includes('introduction')) ||
-          (href === 'contract.html' && path.includes('contract'))) {
+          (href === 'contract.html' && path.includes('contract')) ||
+          (href === 'classmates.html' && path.includes('classmates'))) {
         link.classList.add('active');
       }
     });
@@ -34,6 +35,7 @@ const Header = ({ onNavigate }) => {
           <li><a href="/" onClick={(e) => handleLinkClick(e, 'home')} title="Home">Home</a></li>
           <li><a href="introduction.html" onClick={(e) => handleLinkClick(e, 'introduction')} title="Introduction">Introduction</a></li>
           <li><a href="contract.html" onClick={(e) => handleLinkClick(e, 'contract')} title="Contract">Contract</a></li>
+          <li><a href="classmates.html" onClick={(e) => handleLinkClick(e, 'classmates')} title="Classmates">Classmates</a></li>
         </ul>
       </nav>
       <nav id="secondary-nav">

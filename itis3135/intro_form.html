@@ -259,6 +259,12 @@
         width: 100%;
     }
 }
+
+/* Autofill button styles */
+#autofill-button {
+    background-color: #9C27B0;
+    color: white;
+}
     </style>
 </head>
 <body>
@@ -293,7 +299,7 @@
             <!-- Acknowledgment -->
             <div class="form-group">
                 <label for="acknowledgment" class="required">Acknowledgment Statement</label>
-                <input type="text" id="acknowledgment" name="acknowledgment" placeholder="Enter acknowledgment statement" required value="I understand that what is on this page is not password protected and I will not put anything here that I don’t want publicly available.">
+                <input type="text" id="acknowledgment" name="acknowledgment" placeholder="Enter acknowledgment statement" required value="I understand that what is on this page is not password protected and I will not put anything here that I don't want publicly available.">
             </div>
             
             <div id="date" class="form-group">
@@ -415,7 +421,8 @@
                 <button type="submit">Submit</button>
                 <button type="reset">Reset</button>
                 <button type="button" id="clear-button">Clear</button>
-                <!-- The Generate HTML button will be added automatically by generate_html.js -->
+                <button type="button" id="autofill-button">Autofill Form</button>
+                <!-- The Generate HTML and Generate JSON buttons will be added automatically by JavaScript -->
             </div>
         </form>
         

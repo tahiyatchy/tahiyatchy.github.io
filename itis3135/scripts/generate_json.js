@@ -1,4 +1,92 @@
 // generate_json.js
+// Function to display the generated JSON code
+function displayJSONCode(jsonData) {
+    // Change the H2 title
+    document.querySelector("main h2").textContent = "Introduction JSON";
+    
+    // Hide the form and instructions
+    document.getElementById("form-instructions").style.display = 'none';
+    document.getElementById("intro-form").style.display = "none";
+    
+    // Format JSON with proper indentation
+    const jsonString = JSON.stringify(jsonData, null, 2);
+    
+    // Create the result container with syntax highlighting
+    const resultContainer = document.getElementById("result");
+    resultContainer.innerHTML = `
+        <div class="json-output">
+            <h3>Generated JSON Data</h3>
+            <p>You can copy the JSON data below to use in your applications:</p>
+            <div class="code-container">
+                <pre><code class="language-json">${jsonString}</code></pre>
+            </div>
+            <button type="button" id="copy-json" class="copy-button">Copy JSON Code</button>
+            <p id="reset-link" onclick="resetForm()">← Back to Form</p>
+        </div>
+    `;
+    resultContainer.style.display = "block";
+    
+    // Add copy functionality
+    document.getElementById("copy-json").addEventListener("click", function() {
+        const textArea = document.createElement("textarea");
+        textArea.value = jsonString;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textArea);
+        
+        const copyButton = document.getElementById("copy-json");
+        const originalText = copyButton.textContent;
+        copyButton.textContent = "Copied!";
+        copyButton.style.backgroundColor = "#4CAF50";
+        
+        setTimeout(() => {
+            copyButton.textContent = originalText;
+            copyButton.style.backgroundColor = "";
+        }, 2000);
+    });
+    
+    // Apply syntax highlighting if Highlight.js is available
+    if (typeof hljs !== 'undefined') {
+        hljs.highlightAll();
+    }
+}
+
+// Custom validation function for JSON generation
+function validateJSONForm(formData) {
+    // Check if date is selected
+    const dateInput = document.getElementById('acknowledgment-date');
+    if (!dateInput.value) {
+        alert('Please select a valid date');
+        return false;
+    }
+    
+    // Basic validation for required fields
+    if (!formData.firstName || !formData.lastName || 
+        !formData.mascotAdjective || !formData.mascotAnimal || 
+        !formData.divider || !formData.imageCaption || 
+        !formData.personalStatement || !formData.personalBackground || !formData.academicBackground) {
+        alert("Please fill in all required fields.");
+        return false;
+    }
+    
+    // Check if at least one course is added
+    if (formData.courses.length === 0) {
+        alert("Please add at least one course.");
+        return false;
+    }
+    
+    // Validate each course has all fields
+    for (let course of formData.courses) {
+        if (!course.department || !course.number || !course.name || !course.reason) {
+            alert("Please fill in all course fields.");
+            return false;
+        }
+    }
+    
+    return true;
+}
+
 // Function to generate JSON code from form data
 function generateJSONCode() {
     // Gather form data
@@ -56,67 +144,13 @@ function generateJSONCode() {
         });
     });
     
-    // Validate required fields
-    if (!validateForm(formData)) {
-        alert("Please fill in all required fields before generating JSON.");
+    // Validate required fields using custom JSON validation
+    if (!validateJSONForm(formData)) {
         return;
     }
 
     // Display the JSON code
     displayJSONCode(formData);
-}
-
-// Function to display the generated JSON code
-function displayJSONCode(jsonData) {
-    // Change the H2 title
-    document.querySelector("main h2").textContent = "Introduction JSON";
-    
-    // Hide the form and instructions
-    document.getElementById("form-instructions").style.display = 'none';
-    document.getElementById("intro-form").style.display = "none";
-    
-    // Format JSON with proper indentation
-    const jsonString = JSON.stringify(jsonData, null, 2);
-    
-    // Create the result container with syntax highlighting
-    const resultContainer = document.getElementById("result");
-    resultContainer.innerHTML = `
-        <div class="json-output">
-            <h3>Generated JSON Data</h3>
-            <p>You can copy the JSON data below to use in your applications:</p>
-            <div class="code-container">
-                <pre><code class="language-json">${jsonString}</code></pre>
-            </div>
-            <button type="button" id="copy-json" class="copy-button">Copy JSON Code</button>
-            <p id="reset-link" onclick="resetForm()">← Back to Form</p>
-        </div>
-    `;
-    resultContainer.style.display = "block";
-    
-    // Add copy functionality
-    document.getElementById("copy-json").addEventListener("click", function() {
-        const textArea = document.createElement("textarea");
-        textArea.value = jsonString;
-        document.body.appendChild(textArea);
-        textArea.select();
-        document.execCommand("copy");
-        document.body.removeChild(textArea);
-        
-        const copyButton = document.getElementById("copy-json");
-        const originalText = copyButton.textContent;
-        copyButton.textContent = "Copied!";
-        copyButton.style.backgroundColor = "#4CAF50";
-        
-        setTimeout(() => {
-            copyButton.textContent = originalText;
-            copyButton.style.backgroundColor = "";
-        }, 2000);
-    });
-    
-    // Apply syntax highlighting if Highlight.js is available
-    if (typeof hljs !== 'undefined') {
-        hljs.highlightAll();
-    }
 }
 
 // Initialize when DOM is ready
