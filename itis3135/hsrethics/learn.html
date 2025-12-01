@@ -5,6 +5,306 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Learning Modules - Ethical Research Resource</title>
     <link rel="stylesheet" href="styles/default.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/smoothness/jquery-ui.css">
+    <style>
+        /* Full-width module cards */
+        .module-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .module-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            padding: 25px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-left: 4px solid #007bff;
+        }
+        
+        .module-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+        
+        .module-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+        
+        .module-card:hover::after {
+            left: 100%;
+        }
+        
+        /* Progress Tracker */
+        .progress-tracker {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border: 1px solid #e9ecef;
+        }
+        
+        .progress-bar {
+            height: 12px;
+            background-color: #e9ecef;
+            border-radius: 6px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #45a049);
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 6px;
+        }
+        
+        .progress-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        
+        /* Achievement Badges */
+        .achievement-badge {
+            display: inline-block;
+            background-color: #ffc107;
+            color: #212529;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-left: 10px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Learning Module Styles */
+        .content-section {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .content-section.active {
+            border-left: 4px solid #007bff;
+            background-color: white;
+        }
+        
+        .principle, .review-level {
+            background-color: white;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 6px;
+            border-left: 3px solid #007bff;
+        }
+        
+        .module-completion {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .completion-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        
+        .completion-checkbox input {
+            width: 18px;
+            height: 18px;
+        }
+        
+        .module-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+        
+        .module-nav button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .module-nav button:hover {
+            background-color: #0056b3;
+        }
+        
+        .module-nav button:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease;
+        }
+        
+        /* Quiz Styles */
+        .quiz-container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .quiz-question {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .quiz-option {
+            padding: 12px 16px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .quiz-option:hover {
+            background-color: #e9ecef;
+        }
+        
+        .quiz-option.selected {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+        
+        .quiz-option.correct {
+            background-color: #d4edda;
+            color: #155724;
+            border-color: #c3e6cb;
+        }
+        
+        .quiz-option.incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-color: #f5c6cb;
+        }
+        
+        .quiz-feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 4px;
+            background-color: #e7f3ff;
+            border-left: 4px solid #007bff;
+        }
+        
+        .quiz-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        /* Timeline Styles */
+        #ethics-timeline {
+            margin: 30px 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .timeline-era {
+            padding: 20px;
+        }
+
+        .timeline-era h4 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        /* Glossary Styles */
+        #research-glossary {
+            margin: 30px 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .glossary-term {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .glossary-definition {
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+
+        .acronym {
+            border-bottom: 1px dashed #007bff;
+            cursor: help;
+            color: #007bff;
+        }
+
+        .ui-tooltip {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -13,9 +313,9 @@
                 <h1>Ethical Research Resource</h1>
             </div>
             <ul class="nav-menu">
-                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="project_overview.html">This Initiative</a></li>
-                <li><a href="learn.html">Learn</a></li>
+                <li><a href="learn.html" class="active">Learn</a></li>
                 <li><a href="test.html">Test</a></li>
                 <li><a href="interactive.html">Interactive</a></li>
             </ul>
@@ -23,7 +323,136 @@
     </header>
 
     <main class="container">
+        <div class="hero">
+            <h2>Learn</h2>
+            <p>Use the following resources to familiarize yourself with the basics of ethical human subjects research.</p>
+        </div>
+
+        <!-- Interactive Timeline -->
+        <section class="content-section">
+            <h3>Evolution of Research Ethics Timeline</h3>
+            <p>Explore the historical development of ethical standards in human subjects research:</p>
+            
+            <div id="ethics-timeline">
+                <ul>
+                    <li><a href="#timeline-1">Pre-1900s</a></li>
+                    <li><a href="#timeline-2">1900-1945</a></li>
+                    <li><a href="#timeline-3">1946-1978</a></li>
+                    <li><a href="#timeline-4">1979-Present</a></li>
+                </ul>
+                
+                <div id="timeline-1">
+                    <h4>Early Research Practices (Pre-1900s)</h4>
+                    <p><strong>Key Characteristics:</strong></p>
+                    <ul>
+                        <li>Limited formal ethical guidelines</li>
+                        <li>Research often conducted without explicit consent</li>
+                        <li>Focus on scientific advancement over participant welfare</li>
+                    </ul>
+                    <p><strong>Notable Events:</strong> Early vaccine trials, anthropological studies often conducted without informed consent protocols.</p>
+                </div>
+                
+                <div id="timeline-2">
+                    <h4>Emerging Concerns (1900-1945)</h4>
+                    <p><strong>Key Developments:</strong></p>
+                    <ul>
+                        <li>First formal research ethics guidelines begin to emerge</li>
+                        <li>Growing recognition of need for participant protection</li>
+                        <li>Nuremberg Code established in response to WWII atrocities</li>
+                    </ul>
+                    <p><strong>Landmark:</strong> The 1932 Tuskegee Syphilis Study begins (later becomes a major ethics case study).</p>
+                </div>
+                
+                <div id="timeline-3">
+                    <h4>Regulatory Foundation (1946-1978)</h4>
+                    <p><strong>Major Milestones:</strong></p>
+                    <ul>
+                        <li><strong>1947:</strong> Nuremberg Code establishes informed consent principle</li>
+                        <li><strong>1964:</strong> Declaration of Helsinki provides international guidelines</li>
+                        <li><strong>1974:</strong> National Research Act establishes IRB system in US</li>
+                        <li><strong>1978:</strong> Belmont Report outlines three core ethical principles</li>
+                    </ul>
+                    <p><strong>Impact:</strong> Foundation of modern research ethics regulations and oversight systems.</p>
+                </div>
+                
+                <div id="timeline-4">
+                    <h4>Modern Era (1979-Present)</h4>
+                    <p><strong>Contemporary Developments:</strong></p>
+                    <ul>
+                        <li><strong>1991:</strong> Common Rule establishes uniform US federal policy</li>
+                        <li><strong>1996:</strong> HIPAA introduces health information privacy protections</li>
+                        <li><strong>2000s:</strong> Growing focus on genetic privacy and data security</li>
+                        <li><strong>2010s:</strong> Emphasis on community-engaged and participatory research</li>
+                    </ul>
+                    <p><strong>Current Focus:</strong> Digital ethics, AI in research, global research ethics standards.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Research Glossary Accordion -->
+        <section class="content-section">
+            <h3>Research Ethics Glossary</h3>
+            <p>Click on terms to learn key concepts and definitions in research ethics:</p>
+            
+            <div id="research-glossary">
+                <h4>Informed Consent</h4>
+                <div>
+                    <p><span class="glossary-term">Informed Consent</span> is the process by which a research participant voluntarily confirms their willingness to participate in research, after having been informed of all aspects of the research that are relevant to their decision.</p>
+                    <div class="glossary-definition">
+                        <strong>Key Elements:</strong>
+                        <ul>
+                            <li>Disclosure of relevant information</li>
+                            <li>Participant comprehension</li>
+                            <li>Voluntary participation</li>
+                            <li>Ongoing consent process</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h4>IRB (Institutional Review Board)</h4>
+                <div>
+                    <p><span class="glossary-term">IRB</span> (<span class="acronym" data-definition="Institutional Review Board">Institutional Review Board</span>) is a committee that reviews, approves, and monitors biomedical and behavioral research involving humans to protect their rights and welfare.</p>
+                    <div class="glossary-definition">
+                        <strong>IRB Review Levels:</strong>
+                        <ul>
+                            <li><strong>Exempt:</strong> Minimal risk research</li>
+                            <li><strong>Expedited:</strong> Minimal risk, quick review</li>
+                            <li><strong>Full Board:</strong> More than minimal risk</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                
+                <h4>Vulnerable Populations</h4>
+                <div>
+                    <p><span class="glossary-term">Vulnerable Populations</span> are groups of participants who require special protections in research due to increased risk of coercion or diminished capacity for informed consent.</p>
+                    <div class="glossary-definition">
+                        <strong>Examples Include:</strong>
+                        <ul>
+                            <li>Children and minors</li>
+                            <li>Prisoners</li>
+                            <li>Cognitively impaired individuals</li>
+                            <li>Economically disadvantaged persons</li>
+                            <li>Educational subordinates (students)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <h2>Learning Modules</h2>
+        
+        <!-- Progress Tracker -->
+        <div class="progress-tracker">
+            <h3>Your Learning Progress</h3>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-stats">
+                <span id="progressText">0% Complete</span>
+                <span id="modulesCompleted">0/4 Modules</span>
+            </div>
+        </div>
         <div class="module-grid">
             <div class="module-card" onclick="showContent('belmont-content')">
                 <h3>Belmont Report</h3>
@@ -58,6 +487,30 @@
                 <h4>Justice</h4>
                 <p>Ensuring fair distribution of the benefits and burdens of research.</p>
             </div>
+            
+            <!-- Quiz Section -->
+            <div class="quiz-container">
+                <h4>Test Your Knowledge</h4>
+                <div class="quiz-question" id="belmont-question">Which principle requires that participants provide voluntary, informed consent?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectAnswer(this, 0)">Respect for Persons</div>
+                    <div class="quiz-option" onclick="selectAnswer(this, 1)">Beneficence</div>
+                    <div class="quiz-option" onclick="selectAnswer(this, 2)">Justice</div>
+                    <div class="quiz-option" onclick="selectAnswer(this, 3)">Fidelity</div>
+                </div>
+                <div class="quiz-feedback hidden" id="belmont-feedback"></div>
+            </div>
+            
+            <div class="module-completion">
+                <label class="completion-checkbox">
+                    <input type="checkbox" id="belmont-complete" onchange="trackModuleCompletion('Belmont Report', this.checked)">
+                    Mark as completed
+                </label>
+            </div>
+            
+            <div class="module-nav">
+                <button onclick="showContent('coi-content')">Next: Conflicts of Interest →</button>
+            </div>
         </div>
 
         <div id="coi-content" class="content-section hidden">
@@ -69,6 +522,31 @@
                 <li>Academic pressures</li>
                 <li>Institutional loyalties</li>
             </ul>
+            
+            <!-- Quiz Section -->
+            <div class="quiz-container">
+                <h4>Test Your Knowledge</h4>
+                <div class="quiz-question" id="coi-question">A researcher stands to gain financially if their study shows positive results. This represents:</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectAnswer(this, 0, 'coi')">A conflict of interest</div>
+                    <div class="quiz-option" onclick="selectAnswer(this, 1, 'coi')">Standard research practice</div>
+                    <div class="quiz-option" onclick="selectAnswer(this, 2, 'coi')">Academic freedom</div>
+                    <div class="quiz-option" onclick="selectAnswer(this, 3, 'coi')">Research efficiency</div>
+                </div>
+                <div class="quiz-feedback hidden" id="coi-feedback"></div>
+            </div>
+            
+            <div class="module-completion">
+                <label class="completion-checkbox">
+                    <input type="checkbox" id="coi-complete" onchange="trackModuleCompletion('Conflicts of Interest', this.checked)">
+                    Mark as completed
+                </label>
+            </div>
+            
+            <div class="module-nav">
+                <button onclick="showContent('belmont-content')">← Previous: Belmont Report</button>
+                <button onclick="showContent('irb-content')">Next: IRB Regulations →</button>
+            </div>
         </div>
 
         <div id="irb-content" class="content-section hidden">
@@ -86,6 +564,31 @@
                 <h4>Full Board Review</h4>
                 <p>Research involving more than minimal risk requires review by the full IRB committee.</p>
             </div>
+            
+            <!-- Quiz Section -->
+            <div class="quiz-container">
+                <h4>Test Your Knowledge</h4>
+                <div class="quiz-question" id="irb-question">Which type of IRB review is required for research involving more than minimal risk?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectAnswer(this, 0, 'irb')">Full Board Review</div>
+                    <div class="quiz-option" onclick="selectAnswer(this, 1, 'irb')">Expedited Review</div>
+                    <div class="quiz-option" onclick="selectAnswer(this, 2, 'irb')">Exempt Review</div>
+                    <div class="quiz-option" onclick="selectAnswer(this, 3, 'irb')">No review required</div>
+                </div>
+                <div class="quiz-feedback hidden" id="irb-feedback"></div>
+            </div>
+            
+            <div class="module-completion">
+                <label class="completion-checkbox">
+                    <input type="checkbox" id="irb-complete" onchange="trackModuleCompletion('IRB Regulations', this.checked)">
+                    Mark as completed
+                </label>
+            </div>
+            
+            <div class="module-nav">
+                <button onclick="showContent('coi-content')">← Previous: Conflicts of Interest</button>
+                <button onclick="showContent('data-content')">Next: Data Handling →</button>
+            </div>
         </div>
 
         <div id="data-content" class="content-section hidden">
@@ -97,6 +600,30 @@
                 <li>Data retention policies</li>
                 <li>De-identification procedures</li>
             </ul>
+            
+            <!-- Quiz Section -->
+            <div class="quiz-container">
+                <h4>Test Your Knowledge</h4>
+                <div class="quiz-question" id="data-question">What is the primary purpose of data de-identification in research?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectAnswer(this, 0, 'data')">Protect participant confidentiality</div>
+                    <div class="quiz-option" onclick="selectAnswer(this, 1, 'data')">Make data analysis easier</div>
+                    <div class="quiz-option" onclick="selectAnswer(this, 2, 'data')">Reduce storage costs</div>
+                    <div class="quiz-option" onclick="selectAnswer(this, 3, 'data')">Meet publication requirements</div>
+                </div>
+                <div class="quiz-feedback hidden" id="data-feedback"></div>
+            </div>
+            
+            <div class="module-completion">
+                <label class="completion-checkbox">
+                    <input type="checkbox" id="data-complete" onchange="trackModuleCompletion('Data Handling', this.checked)">
+                    Mark as completed
+                </label>
+            </div>
+            
+            <div class="module-nav">
+                <button onclick="showContent('irb-content')">← Previous: IRB Regulations</button>
+            </div>
         </div>
     </main>
 
@@ -111,6 +638,304 @@
         </div>
     </footer>
 
-    <script src="scripts/include.js"></script>
+    <script>
+        // ===== FUNCTION DEFINITIONS =====
+        
+        // Quiz answers
+        const quizAnswers = {
+            belmont: 0,
+            coi: 0,
+            irb: 0,
+            data: 0
+        };
+        
+        // Quiz feedback
+        const quizFeedback = {
+            belmont: "Correct! Respect for Persons requires acknowledging autonomy and protecting those with diminished autonomy through informed consent.",
+            coi: "Correct! Financial conflicts of interest occur when researchers have financial stakes that could influence their research conduct or outcomes.",
+            irb: "Correct! Research involving more than minimal risk requires Full Board Review by the complete IRB committee.",
+            data: "Correct! De-identification protects participant confidentiality by removing personally identifiable information."
+        };
+        
+        // Define all available modules
+        const ALL_MODULES = ['Belmont Report', 'Conflicts of Interest', 'IRB Regulations', 'Data Handling'];
+        
+        // Global variables
+        let completedModules = [];
+        
+        // Initialize progress tracker
+        function initializeProgressTracker() {
+            // Load completed modules from localStorage
+            const storedModules = localStorage.getItem('completedModules');
+            
+            if (storedModules) {
+                try {
+                    completedModules = JSON.parse(storedModules);
+                } catch (e) {
+                    console.error('Error parsing stored modules:', e);
+                    completedModules = [];
+                }
+            } else {
+                completedModules = [];
+            }
+            
+            updateProgressDisplay();
+            updateCompletionCheckboxes();
+        }
+        
+        // Initialize jQuery UI components
+        function initializeJQueryUI() {
+            // Initialize timeline tabs
+            $("#ethics-timeline").tabs({
+                activate: function(event, ui) {
+                    // Update timeline visualization when tabs change
+                    const activeIndex = ui.newTab.index();
+                    highlightTimelineEra(activeIndex);
+                }
+            });
+            
+            // Initialize glossary accordion
+            $("#research-glossary").accordion({
+                collapsible: true,
+                heightStyle: "content",
+                active: false
+            });
+            
+            // Initialize tooltips for acronyms
+            $(".acronym").tooltip({
+                content: function() {
+                    return $(this).data('definition');
+                },
+                position: {
+                    my: "left+15 center",
+                    at: "right center"
+                }
+            });
+        }
+        
+        function highlightTimelineEra(eraIndex) {
+            // Remove highlight from all timeline headers
+            $("#ethics-timeline .ui-tabs-anchor").removeClass('timeline-highlight');
+            // Add highlight to current era
+            $("#ethics-timeline .ui-tabs-anchor").eq(eraIndex).addClass('timeline-highlight');
+        }
+        
+        // Show content function for learn.html
+        function showContent(contentId) {
+            // Hide all content sections
+            const allContent = document.querySelectorAll('.content-section');
+            allContent.forEach(content => {
+                content.classList.add('hidden');
+                content.classList.remove('active');
+            });
+            
+            // Show selected content
+            const selectedContent = document.getElementById(contentId);
+            if (selectedContent) {
+                selectedContent.classList.remove('hidden');
+                selectedContent.classList.add('active');
+                selectedContent.classList.add('fade-in');
+                
+                // Scroll to the content
+                selectedContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+        
+        // Quiz functionality
+        function selectAnswer(element, selectedIndex, quizType = 'belmont') {
+            const options = element.parentElement.children;
+            const feedbackId = `${quizType}-feedback`;
+            const feedbackElement = document.getElementById(feedbackId);
+            
+            // Remove selected class from all options
+            for (let i = 0; i < options.length; i++) {
+                options[i].classList.remove('selected', 'correct', 'incorrect');
+            }
+            
+            // Add selected class to chosen option
+            element.classList.add('selected');
+            
+            // Check if answer is correct
+            if (selectedIndex === quizAnswers[quizType]) {
+                element.classList.add('correct');
+                feedbackElement.innerHTML = `<strong>Correct!</strong> ${quizFeedback[quizType]}`;
+                feedbackElement.style.backgroundColor = '#d4edda';
+                feedbackElement.style.borderLeftColor = '#28a745';
+            } else {
+                element.classList.add('incorrect');
+                feedbackElement.innerHTML = `<strong>Incorrect.</strong> ${quizFeedback[quizType]}`;
+                feedbackElement.style.backgroundColor = '#f8d7da';
+                feedbackElement.style.borderLeftColor = '#dc3545';
+            }
+            
+            feedbackElement.classList.remove('hidden');
+        }
+        
+        // Progress Tracker functionality
+        function trackModuleCompletion(moduleName, isCompleted) {
+            if (isCompleted) {
+                // Add module if not already completed
+                if (!completedModules.includes(moduleName)) {
+                    completedModules.push(moduleName);
+                    // Update progress display and checkboxes
+                    updateProgressDisplay();
+                    updateCompletionCheckboxes();
+                }
+            } else {
+                // Remove module from completed list
+                const index = completedModules.indexOf(moduleName);
+                if (index > -1) {
+                    completedModules.splice(index, 1);
+                }
+            }
+            
+            // Save to localStorage
+            localStorage.setItem('completedModules', JSON.stringify(completedModules));
+            
+            // Show achievement badge
+            if (isCompleted) {
+                showAchievementBadge(moduleName);
+            }
+            
+            // Update progress display
+            updateProgressDisplay();
+        }
+        
+        function updateProgressDisplay() {
+            const totalModules = ALL_MODULES.length;
+            const completedCount = completedModules.length;
+            const completionPercentage = Math.round((completedCount / totalModules) * 100);
+            
+            // Update progress bar
+            const progressFill = document.getElementById('progressFill');
+            if (progressFill) {
+                progressFill.style.width = `${completionPercentage}%`;
+            }
+            
+            // Update progress text
+            const progressText = document.getElementById('progressText');
+            if (progressText) {
+                progressText.textContent = `${completionPercentage}% Complete`;
+            }
+            
+            // Update modules completed count
+            const modulesCompleted = document.getElementById('modulesCompleted');
+            if (modulesCompleted) {
+                modulesCompleted.textContent = `${completedCount}/${totalModules} Modules`;
+            }
+            
+            // Check for completion milestone
+            if (completionPercentage === 100) {
+                showCompletionMessage();
+            }
+        }
+        
+        function updateCompletionCheckboxes() {
+            // Update checkboxes based on completed modules
+            const checkboxes = {
+                'Belmont Report': 'belmont-complete',
+                'Conflicts of Interest': 'coi-complete',
+                'IRB Regulations': 'irb-complete',
+                'Data Handling': 'data-complete'
+            };
+            
+            for (const [moduleName, checkboxId] of Object.entries(checkboxes)) {
+                const checkbox = document.getElementById(checkboxId);
+                if (checkbox) {
+                    checkbox.checked = completedModules.includes(moduleName);
+                }
+            }
+        }
+        
+        function showAchievementBadge(moduleName) {
+            // Create and show achievement badge
+            const badge = document.createElement('span');
+            badge.className = 'achievement-badge';
+            badge.textContent = 'Completed!';
+            
+            // Find the module card and add badge
+            const moduleCards = document.querySelectorAll('.module-card');
+            moduleCards.forEach(card => {
+                if (card.querySelector('h3').textContent === moduleName) {
+                    card.querySelector('h3').appendChild(badge);
+                    
+                    // Remove badge after 3 seconds
+                    setTimeout(() => {
+                        if (badge.parentNode) {
+                            badge.parentNode.removeChild(badge);
+                        }
+                    }, 3000);
+                }
+            });
+        }
+        
+        function showCompletionMessage() {
+            // Create completion message
+            const message = document.createElement('div');
+            message.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: white;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                z-index: 1000;
+                text-align: center;
+                max-width: 300px;
+            `;
+            message.innerHTML = `
+                <h3>Congratulations! 🎉</h3>
+                <p>You've completed all learning modules!</p>
+                <button onclick="this.parentNode.remove()" style="margin-top: 10px; padding: 8px 16px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">Continue</button>
+            `;
+            
+            document.body.appendChild(message);
+        }
+        
+        // Reset function for testing
+        function resetProgress() {
+            completedModules = [];
+            localStorage.removeItem('completedModules');
+            updateProgressDisplay();
+            updateCompletionCheckboxes();
+        }
+        
+        // ===== EVENT LISTENERS AND INITIALIZATION =====
+        
+        // Enhanced Module Card Interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            const moduleCards = document.querySelectorAll('.module-card');
+            
+            // Add click tracking and visual feedback
+            moduleCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // Add visual feedback
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 200);
+                });
+            });
+            
+            // Set active navigation link
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+            
+            // Initialize progress tracker and checkboxes
+            initializeProgressTracker();
+            
+            // Initialize jQuery UI components
+            setTimeout(initializeJQueryUI, 100);
+        });
+    </script>
 </body>
 </html>

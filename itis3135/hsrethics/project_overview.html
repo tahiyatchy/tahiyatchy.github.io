@@ -5,6 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>This Initiative - Ethical Research Resource</title>
     <link rel="stylesheet" href="styles/default.css">
+    <style>
+        .module-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .design-figure {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .design-image {
+            max-width: 100%;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+        }
+        
+        .client-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .info-item {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+        }
+
+        .lazy-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .lazy-section.loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -24,71 +71,135 @@
 
     <main class="container">
         <div class="hero">
-            <h1>This Initiative</h1>
-            <p>Comprehensive overview of the Ethical Human Subjects Research educational platform</p>
+            <h1>This Initiative - Project Overview</h1>
+            <p>Overview of the <strong>Interactive Ethical Human Subjects Research Resource</strong></p>
         </div>
 
-        <section class="content-section">
-            <h2>Project Overview</h2>
+        <section class="content-section lazy-section">
             <div class="project-content">
                 <h3>Application Description and Purpose</h3>
                 <p>The Interactive Ethical Human Subject Research Resource is an educational platform designed to help students, researchers, and academic professionals understand and apply ethical principles in human subjects research. The platform provides comprehensive learning materials, interactive assessments, and realistic ethical dilemma scenarios based on established frameworks including The Belmont Report, HIPAA regulations, and IRB guidelines.</p>
-                
-                <p>The primary purpose is to create an engaging, accessible resource that prompts prospective researchers to think in terms of real-world scenarios over answers in a vacuum. It is also meant to direct researchers to ask the right questions about their own research to ensure all boxes are checked in the ethics department.</p>
-
-                <h3>Intended Users</h3>
-                <ul>
-                    <li><strong>University Students:</strong> This resource is meant to be a dynamic resource for novice researchers in human subject research.</li>
-                    <li><strong>Professors and IRB:</strong> A place to direct students and prospectove researchers to ensure they have the chance to assess their research themselves before seeking higher guidance.</li>
-                </ul>
-
-                <h3>Website Content Overview</h3>
-                <ul>
-                    <li><strong>Learning Modules:</strong> Comprehensive guides on Belmont Report principles, conflicts of interest, IRB regulations, and data privacy</li>
-                    <li><strong>Knowledge Assessments:</strong> Interactive quizzes to test understanding of ethical guidelines</li>
-                    <li><strong>Ethical Scenarios:</strong> Multi-step, choose-your-own-adventure style dilemmas with immediate feedback</li>
-                    <li><strong>Research Methodology Assessment:</strong> Tools to evaluate research plans for ethical compliance</li>
-                    <li><strong>Resource Library:</strong> Reference materials, guidelines, and best practices</li>
-                </ul>
             </div>
         </section>
 
-        <section class="content-section">
-            <h2>Client Information</h2>
-            <div class="client-info">
-                <div class="info-item">
-                    <h3>Client Name</h3>
-                    <p>[private]</p>
-                    <p>Composing Across Borders Professor</p>
-                </div>
-                <div class="info-item">
-                    <h3>UNC Charlotte Department of Writing, Rhetoric & Digital Studies</h3>
-                    <p></p>
-                </div>
-                <div class="info-item">
-                    <h3>Email Address</h3>
-                    <p>[private]@charlotte.edu</p>
-                </div>
-            </div>
+        <section class="content-section lazy-section">
+            <h3>Primary Purpose</h3>
+            <p>The primary purpose is to create an engaging, accessible resource that prompts prospective researchers to think in terms of real-world scenarios over answers in a vacuum. It is also meant to direct researchers to ask the right questions about their own research to ensure all boxes are checked in the ethics department.</p>
         </section>
 
-        <section class="content-section">
-            <h2>Wireframe</h2>
-            <p>The wireframe below illustrates the default page layout and user interface design for the platform:</p>
-            <figure class="design-figure">
-                <img src="" alt="Wireframe diagram showing the layout of the Ethical Research Resource website" class="design-image">
-                <figcaption>Fig. 1 - Website wireframe showing navigation, content areas, and interactive elements</figcaption>
-            </figure>
-            <p><a href="images/wireframe.png" target="_blank">View full wireframe specification</a></p>
+        <section class="content-section lazy-section">
+            <h3>Intended Users</h3>
+            <ul>
+                <li><strong>University Students:</strong> This resource is meant to be a dynamic resource for novice researchers in human subject research.</li>
+                <li><strong>Professors and IRB:</strong> A place to direct students and prospective researchers to ensure they have the chance to assess their research themselves before seeking higher guidance.</li>
+            </ul>
         </section>
 
-        <section class="content-section">
-            <h2>Site Map</h2>
-            <p>The site map below outlines the complete structure and navigation flow of the website:</p>
-            <figure class="design-figure">
-                <img src="images/sitemap.png" alt="Site map diagram showing the structure of the Ethical Research Resource website" class="design-image">
-                <figcaption>Fig. 2 - Site map illustrating page hierarchy and navigation relationships</figcaption>
-            </figure>
+        <section class="content-section lazy-section">
+            <h3>Website Content Overview</h3>
+            <ul>
+                <li><strong>Learning Modules:</strong> Guides on Belmont Report principles, conflicts of interest, IRB regulations, and data privacy</li>
+                <li><strong>Knowledge Assessments:</strong> Interactive quizzes to test understanding of ethical guidelines</li>
+                <li><strong>Ethical Scenarios:</strong> Multi-step realistic scenarios that challenge users to apply ethical principles</li>
+                <li><strong>Resource Library:</strong> Collection of official documents, guidelines, and reference materials</li>
+                <li><strong>Interactive Tools:</strong> Decision-making aids and ethical assessment checklists</li>
+            </ul>
+        </section>
+        <section class="content-section lazy-section">
+            <h3>Design</h3>
+<h4>Layout</h4>
+<br>
+<figure>
+    <img src="images/sitemap.png" style="margin-left: 15%;">
+    <figcaption style="text-align: center;">
+        Site Map created with <a href="https://www.gloomaps.com/">Gloomaps</a>
+    </figcaption>
+</figure>
+<br><br>
+<figure>
+    <img src="images/wireframe.png" style="margin-left: 15%;">
+    <figcaption style="text-align: center;">
+        Wireframe created with draw.io. Access file <a href="https://drive.google.com/file/d/1PsW5_-Ewu9lH7bA1pQ811kwUYaNUvmbL/view?usp=sharing">here.</a>
+    </figcaption>
+</figure>
+<br><br>
+<h4>Dynamic Functionality</h4>
+<br>
+<ul>
+    <li><strong>Home Page:</strong> Lazy loading sections with fade-in animations, AJAX-powered clinical trials data loading from external API, real-time content visibility tracking</li>
+    <li><strong>This Initiative (Project Overview):</strong> Scroll-triggered animations, interactive timeline with progress visualization, local storage for user viewing history</li>
+    <li><strong>Learn Page:</strong> Interactive educational modules with expandable/collapsible sections, progress tracking with visual indicators, bookmarking functionality using local storage</li>
+    <li><strong>Test Page:</strong> Dynamic quiz generation with randomized questions, real-time scoring and progress visualization, form validation for quiz submissions, results persistence in local storage</li>
+    <li><strong>Interactive Page:</strong> Scenario-based learning with branching decision paths, real-time ethical dilemma simulations, state management for user choices and consequences, progress tracking through multi-step scenarios</li>
+</ul>
+<br><br>
+<h4>Page Specifications</h4>
+<br>
+<div class="page-specs">
+    <div class="page-item">
+        <h5>Home Page (index.html)</h5>
+        <ul>
+            <li><strong>Purpose:</strong> Introduction and overview of the ethical research resource platform</li>
+            <li><strong>Audience:</strong> Students, researchers, and educators in human subjects research</li>
+            <li><strong>Content:</strong> Welcome message, real clinical trials data, about section, disclaimers, terms, resources</li>
+            <li><strong>User Data Entry:</strong> No data entry forms</li>
+            <li><strong>Interactive Elements:</strong> Navigation links, lazy-loaded sections, dynamic clinical trials data loading</li>
+            <li><strong>Actions:</strong> Section fade-in animations on scroll, AJAX data fetching, navigation between pages</li>
+        </ul>
+    </div>
+<br>
+    <div class="page-item">
+        <h5>This Initiative (project_overview.html)</h5>
+        <ul>
+            <li><strong>Purpose:</strong> Explain the project goals, methodology, and development process</li>
+            <li><strong>Audience:</strong> Educators, project stakeholders, and curious users</li>
+            <li><strong>Content:</strong> Project background, design philosophy, development timeline, team information</li>
+            <li><strong>User Data Entry:</strong> No data entry forms</li>
+            <li><strong>Interactive Elements:</strong> Interactive timeline, expandable sections, progress indicators</li>
+            <li><strong>Actions:</strong> Scroll-triggered animations, timeline navigation, section expansion/collapse</li>
+        </ul>
+    </div>
+<br>
+    <div class="page-item">
+        <h5>Learn Page (learn.html)</h5>
+        <ul>
+            <li><strong>Purpose:</strong> Educational content delivery about ethical research principles</li>
+            <li><strong>Audience:</strong> Students and researchers seeking to learn ethical guidelines</li>
+            <li><strong>Content:</strong> Belmont Report principles, HIPAA guidelines, informed consent, vulnerable populations</li>
+            <li><strong>User Data Entry:</strong> Interactive knowledge checks and self-assessment questions</li>
+            <li><strong>Validations:</strong> Answer validation for knowledge check questions</li>
+            <li><strong>Interactive Elements:</strong> Expandable content sections, progress trackers, interactive examples, navigation buttons</li>
+            <li><strong>Actions:</strong> Content section expansion, progress tracking, bookmarking, knowledge check validation</li>
+        </ul>
+    </div>
+<br>
+    <div class="page-item">
+        <h5>Test Page (test.html)</h5>
+        <ul>
+            <li><strong>Purpose:</strong> Assess user knowledge through quizzes and scenarios</li>
+            <li><strong>Audience:</strong> Students testing their understanding of ethical principles</li>
+            <li><strong>Content:</strong> Multiple-choice questions, scenario-based questions, instant feedback</li>
+            <li><strong>User Data Entry:</strong> Quiz answers and form submissions</li>
+            <li><strong>Validations:</strong> Required field validation, answer selection validation</li>
+            <li><strong>Interactive Elements:</strong> Radio buttons, checkboxes, submit buttons, progress bars, score displays</li>
+            <li><strong>Actions:</strong> Real-time scoring, progress visualization, results calculation, local storage of scores</li>
+        </ul>
+    </div>
+<br>
+    <div class="page-item">
+        <h5>Interactive Page (interactive.html)</h5>
+        <ul>
+            <li><strong>Purpose:</strong> Hands-on ethical dilemma simulations and decision-making practice</li>
+            <li><strong>Audience:</strong> Learners applying ethical principles to realistic scenarios</li>
+            <li><strong>Content:</strong> Branching scenarios, ethical dilemmas, consequence explanations</li>
+            <li><strong>User Data Entry:</strong> Scenario choices and decision inputs</li>
+            <li><strong>Validations:</strong> Choice selection validation before proceeding</li>
+            <li><strong>Interactive Elements:</strong> Decision buttons, branching paths, consequence displays, restart options</li>
+            <li><strong>Actions:</strong> Scenario progression, consequence calculation, path tracking, state management between steps</li>
+            <li><strong>Special Notes:</strong> Complex state management for multi-step scenarios with branching logic</li>
+        </ul>
+    </div>
+</div>
         </section>
     </main>
 
@@ -103,6 +214,37 @@
         </div>
     </footer>
 
-    <script src="scripts/include.js"></script>
+    <script>
+        // Set active navigation link
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+
+            // Lazy loading for sections
+            const sections = document.querySelectorAll('.lazy-section');
+            const sectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('loaded');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '50px'
+            });
+
+            sections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+        });
+    </script>
 </body>
 </html>

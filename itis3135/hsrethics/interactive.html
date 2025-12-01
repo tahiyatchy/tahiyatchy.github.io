@@ -5,6 +5,233 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Learning - Ethical Research Resource</title>
     <link rel="stylesheet" href="styles/default.css">
+    <style>
+        .module-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            width:100%;
+        }
+        
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .module-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+        
+        .module-card:hover::after {
+            left: 100%;
+        }
+        
+        /* Scenario Container Styles */
+        .scenario-container {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .scenario-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .scenario-choices {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .scenario-choice {
+            padding: 15px;
+            background-color: white;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .scenario-choice:hover {
+            background-color: #e9ecef;
+            transform: translateX(5px);
+        }
+        
+        .scenario-feedback {
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border-left: 4px solid #007bff;
+            background-color: #e7f3ff;
+        }
+        
+        .scenario-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        /* Research Assessment Styles */
+        .research-container {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .research-progress {
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: #6c757d;
+        }
+        
+        .research-question {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .research-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .research-option {
+            padding: 15px;
+            background-color: white;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .research-option:hover {
+            background-color: #e9ecef;
+        }
+        
+        .research-option.selected {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+        
+        .research-result {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .result-category {
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+        
+        .result-good {
+            background-color: #d4edda;
+            color: #155724;
+            border-left: 4px solid #28a745;
+        }
+        
+        .result-needs-improvement {
+            background-color: #fff3cd;
+            color: #856404;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .result-poor {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-left: 4px solid #dc3545;
+        }
+        
+        .recommendations {
+            margin-top: 20px;
+        }
+        
+        .recommendations ul {
+            padding-left: 20px;
+        }
+        
+        .recommendations li {
+            margin-bottom: 10px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .btn.secondary {
+            background-color: #6c757d;
+        }
+        
+        .btn.secondary:hover {
+            background-color: #545b62;
+        }
+        
+        .hidden {
+            display: none;
+        }
+
+        /* Clinical Trials Styles */
+        .clinical-trials-container {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .trial-example {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 6px;
+            border-left: 3px solid #17a2b8;
+        }
+
+        .trial-example h5 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+
+        .loading-message {
+            text-align: center;
+            padding: 20px;
+            color: #6c757d;
+            font-style: italic;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -14,6 +241,7 @@
             </div>
             <ul class="nav-menu">
                 <li><a href="index.html">Home</a></li>
+                <li><a href="project_overview.html">This Initiative</a></li>
                 <li><a href="learn.html">Learn</a></li>
                 <li><a href="test.html">Test</a></li>
                 <li><a href="interactive.html" class="active">Interactive</a></li>
@@ -21,8 +249,12 @@
         </nav>
     </header>
 
-    <main class="container">
-        <h2>Interactive Learning</h2>
+    <main class="container" style="width:100%">
+        <div class="hero">
+            <h2>Interactive Tools</h2>
+            <p>Before you conduct your research.</p>
+        </div>
+        
         <div class="module-grid">
             <div class="module-card" onclick="startScenario()">
                 <h3>Ethical Scenarios</h3>
@@ -33,6 +265,7 @@
                 <p>Evaluate your research methodology for ethical compliance.</p>
             </div>
         </div>
+
 
         <!-- Enhanced Scenario Container -->
         <div id="scenario-container" class="scenario-container hidden">
@@ -47,8 +280,8 @@
 
         <!-- Research Assessment Container -->
         <div id="research-container" class="research-container hidden">
-            <div id="research-progress"></div>
-            <div id="research-question"></div>
+            <div id="research-progress" class="research-progress"></div>
+            <div id="research-question" class="research-question"></div>
             <div id="research-options" class="research-options"></div>
             <button id="research-next" class="btn hidden">Next Question</button>
             <div id="research-result" class="research-result hidden"></div>
@@ -66,6 +299,404 @@
         </div>
     </footer>
 
-    <script src="scripts/include.js"></script>
+    <script>
+        
+        // Research Assessment Questions
+        const researchQuestions = [
+            {
+                question: "Does your research involve any vulnerable populations?",
+                options: [
+                    "No, only competent adults",
+                    "Yes, children under 18",
+                    "Yes, prisoners or institutionalized individuals",
+                    "Yes, economically or educationally disadvantaged persons"
+                ],
+                weight: 2,
+                category: "participant_protection"
+            },
+            {
+                question: "How will you obtain informed consent?",
+                options: [
+                    "Written consent with detailed information",
+                    "Oral consent with documentation",
+                    "Implied consent through survey completion",
+                    "Waiver of consent approved by IRB"
+                ],
+                weight: 3,
+                category: "consent"
+            },
+            {
+                question: "How will you protect participant confidentiality?",
+                options: [
+                    "Full data anonymization with no identifiers",
+                    "Pseudonymization with secure key storage",
+                    "Limited identifiers with access controls",
+                    "Identifiable data with consent for specific uses"
+                ],
+                weight: 3,
+                category: "data_protection"
+            },
+            {
+                question: "What is your data storage and security plan?",
+                options: [
+                    "Encrypted servers with access logging and regular audits",
+                    "Password-protected devices with backup procedures",
+                    "Standard university network storage",
+                    "Personal devices with basic security"
+                ],
+                weight: 2,
+                category: "data_protection"
+            },
+            {
+                question: "How will you handle potential conflicts of interest?",
+                options: [
+                    "Full disclosure to IRB and participants with management plan",
+                    "Disclosure to IRB only",
+                    "Internal management without formal disclosure",
+                    "No identified conflicts of interest"
+                ],
+                weight: 2,
+                category: "integrity"
+            },
+            {
+                question: "What is your plan for data retention and destruction?",
+                options: [
+                    "Follow IRB-approved timeline with certified destruction",
+                    "Keep data indefinitely for future research",
+                    "Destroy when primary analysis complete",
+                    "No formal plan"
+                ],
+                weight: 1,
+                category: "data_protection"
+            }
+        ];
+
+        // Research Assessment Scoring
+        const scoringGuide = {
+            participant_protection: {
+                "No, only competent adults": 3,
+                "Yes, children under 18": 1,
+                "Yes, prisoners or institutionalized individuals": 0,
+                "Yes, economically or educationally disadvantaged persons": 1
+            },
+            consent: {
+                "Written consent with detailed information": 3,
+                "Oral consent with documentation": 2,
+                "Implied consent through survey completion": 1,
+                "Waiver of consent approved by IRB": 2
+            },
+            data_protection: {
+                "Full data anonymization with no identifiers": 3,
+                "Pseudonymization with secure key storage": 2,
+                "Limited identifiers with access controls": 1,
+                "Identifiable data with consent for specific uses": 0,
+                "Encrypted servers with access logging and regular audits": 3,
+                "Password-protected devices with backup procedures": 2,
+                "Standard university network storage": 1,
+                "Personal devices with basic security": 0,
+                "Follow IRB-approved timeline with certified destruction": 3,
+                "Keep data indefinitely for future research": 1,
+                "Destroy when primary analysis complete": 2,
+                "No formal plan": 0
+            },
+            integrity: {
+                "Full disclosure to IRB and participants with management plan": 3,
+                "Disclosure to IRB only": 2,
+                "Internal management without formal disclosure": 1,
+                "No identified conflicts of interest": 3
+            }
+        };
+
+        // Global variables for research assessment
+        let currentResearchQuestion = 0;
+        let researchScore = 0;
+        let researchAnswers = [];
+
+        // Enhanced Module Card Interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            const moduleCards = document.querySelectorAll('.module-card');
+            
+            // Add click tracking and visual feedback
+            moduleCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // Add visual feedback
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 200);
+                });
+            });
+            
+            // Set active navigation link
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+
+            // Load clinical trials data
+            setTimeout(loadClinicalTrialsExample, 1000);
+        });
+        
+        // Scenario functionality
+        function startScenario() {
+            // Show scenario selection
+            const container = document.getElementById('scenario-container');
+            const researchContainer = document.getElementById('research-container');
+            
+            container.classList.remove('hidden');
+            researchContainer.classList.add('hidden');
+            
+            // For brevity, showing a simple scenario implementation
+            document.getElementById('scenario-text').innerHTML = `
+                <h3>Vulnerable Population Research</h3>
+                <p>You're conducting research on educational outcomes and want to include participants from a local homeless shelter. The shelter director is enthusiastic and offers to help recruit participants. What is your first step?</p>
+            `;
+            
+            document.getElementById('scenario-choices').innerHTML = `
+                <div class="scenario-choice" onclick="selectScenarioChoice(0)">Accept the director's help and start recruitment immediately</div>
+                <div class="scenario-choice" onclick="selectScenarioChoice(1)">Consult with your IRB about special protections needed</div>
+                <div class="scenario-choice" onclick="selectScenarioChoice(2)">Design a separate consent process with additional safeguards</div>
+            `;
+            
+            document.getElementById('scenario-feedback').classList.add('hidden');
+            document.getElementById('scenario-restart').classList.add('hidden');
+            document.getElementById('scenario-reset').classList.remove('hidden');
+        }
+        
+        function selectScenarioChoice(choiceIndex) {
+            const feedbackElement = document.getElementById('scenario-feedback');
+            const choices = document.querySelectorAll('.scenario-choice');
+            
+            // Remove any previous selections
+            choices.forEach(choice => {
+                choice.style.pointerEvents = 'none';
+            });
+            
+            // Show feedback based on choice
+            if (choiceIndex === 0) {
+                feedbackElement.innerHTML = `
+                    <h4>Decision Feedback</h4>
+                    <p>This approach may create undue influence. Vulnerable populations require careful consideration of coercion risks.</p>
+                    <p class="negative-feedback">✗ This approach raises ethical concerns</p>
+                `;
+            } else if (choiceIndex === 1) {
+                feedbackElement.innerHTML = `
+                    <h4>Decision Feedback</h4>
+                    <p>Good start! Consulting your IRB ensures you follow proper protocols for vulnerable populations.</p>
+                    <p class="positive-feedback">✓ This approach aligns with ethical standards</p>
+                `;
+            } else {
+                feedbackElement.innerHTML = `
+                    <h4>Decision Feedback</h4>
+                    <p>Proactive approach, but you should still consult your IRB before implementation.</p>
+                    <p class="neutral-feedback">→ This approach has both strengths and limitations</p>
+                `;
+            }
+            
+            feedbackElement.classList.remove('hidden');
+            document.getElementById('scenario-restart').classList.remove('hidden');
+        }
+        
+        // Research Assessment Functionality
+        function startResearchAssessment() {
+            // Reset assessment state
+            currentResearchQuestion = 0;
+            researchScore = 0;
+            researchAnswers = [];
+            
+            // Show research container
+            const researchContainer = document.getElementById('research-container');
+            const scenarioContainer = document.getElementById('scenario-container');
+            
+            researchContainer.classList.remove('hidden');
+            scenarioContainer.classList.add('hidden');
+            
+            // Display first question
+            displayResearchQuestion();
+        }
+        
+        function displayResearchQuestion() {
+            const question = researchQuestions[currentResearchQuestion];
+            const progressElement = document.getElementById('research-progress');
+            const questionElement = document.getElementById('research-question');
+            const optionsElement = document.getElementById('research-options');
+            const nextButton = document.getElementById('research-next');
+            const resultElement = document.getElementById('research-result');
+            
+            // Update progress
+            progressElement.textContent = `Question ${currentResearchQuestion + 1} of ${researchQuestions.length}`;
+            
+            // Display question
+            questionElement.textContent = question.question;
+            
+            // Clear previous options
+            optionsElement.innerHTML = '';
+            
+            // Display options
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'research-option';
+                optionElement.textContent = option;
+                optionElement.onclick = () => selectResearchAnswer(index, option);
+                optionsElement.appendChild(optionElement);
+            });
+            
+            // Hide next button and result
+            nextButton.classList.add('hidden');
+            resultElement.classList.add('hidden');
+        }
+        
+        function selectResearchAnswer(index, answer) {
+            const options = document.querySelectorAll('.research-option');
+            const nextButton = document.getElementById('research-next');
+            
+            // Remove selected class from all options
+            options.forEach(option => option.classList.remove('selected'));
+            
+            // Add selected class to chosen option
+            options[index].classList.add('selected');
+            
+            // Store answer
+            researchAnswers[currentResearchQuestion] = {
+                question: researchQuestions[currentResearchQuestion].question,
+                answer: answer,
+                category: researchQuestions[currentResearchQuestion].category
+            };
+            
+            // Show next button
+            nextButton.classList.remove('hidden');
+            nextButton.onclick = nextResearchQuestion;
+        }
+        
+        function nextResearchQuestion() {
+            currentResearchQuestion++;
+            
+            if (currentResearchQuestion < researchQuestions.length) {
+                displayResearchQuestion();
+            } else {
+                calculateResearchScore();
+                showResearchResults();
+            }
+        }
+        
+        function calculateResearchScore() {
+            let totalScore = 0;
+            let maxScore = 0;
+            
+            researchAnswers.forEach((answer, index) => {
+                const question = researchQuestions[index];
+                const score = scoringGuide[answer.category][answer.answer] * question.weight;
+                totalScore += score;
+                maxScore += 3 * question.weight; // Maximum score per question is 3
+            });
+            
+            researchScore = Math.round((totalScore / maxScore) * 100);
+        }
+        
+        function showResearchResults() {
+            const questionElement = document.getElementById('research-question');
+            const optionsElement = document.getElementById('research-options');
+            const nextButton = document.getElementById('research-next');
+            const resultElement = document.getElementById('research-result');
+            const progressElement = document.getElementById('research-progress');
+            
+            // Hide question elements
+            questionElement.textContent = '';
+            optionsElement.innerHTML = '';
+            nextButton.classList.add('hidden');
+            progressElement.textContent = 'Assessment Complete';
+            
+            // Determine result category
+            let resultCategory, resultClass, resultTitle, resultDescription;
+            
+            if (researchScore >= 80) {
+                resultCategory = 'Good';
+                resultClass = 'result-good';
+                resultTitle = 'Strong Ethical Foundation';
+                resultDescription = 'Your research plan demonstrates a strong understanding of ethical principles. Continue to consult with your IRB as needed.';
+            } else if (researchScore >= 60) {
+                resultCategory = 'Needs Improvement';
+                resultClass = 'result-needs-improvement';
+                resultTitle = 'Some Areas Need Attention';
+                resultDescription = 'Your research plan has good foundations but needs refinement in key ethical areas. Review the recommendations below.';
+            } else {
+                resultCategory = 'Poor';
+                resultClass = 'result-poor';
+                resultTitle = 'Significant Ethical Concerns';
+                resultDescription = 'Your research plan requires substantial revision to meet ethical standards. Consult with your IRB before proceeding.';
+            }
+            
+            // Generate recommendations
+            const recommendations = generateRecommendations();
+            
+            // Display results
+            resultElement.innerHTML = `
+                <h3>Research Assessment Results</h3>
+                <div class="result-category ${resultClass}">
+                    ${resultTitle} - Score: ${researchScore}%
+                </div>
+                <p>${resultDescription}</p>
+                <div class="recommendations">
+                    <h4>Recommendations for Improvement:</h4>
+                    <ul>
+                        ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                    </ul>
+                </div>
+                <button class="btn" onclick="startResearchAssessment()" style="margin-top: 15px;">Retake Assessment</button>
+            `;
+            
+            resultElement.classList.remove('hidden');
+        }
+        
+        function generateRecommendations() {
+            const recommendations = [];
+            
+            // Analyze answers and generate specific recommendations
+            researchAnswers.forEach(answer => {
+                const score = scoringGuide[answer.category][answer.answer];
+                
+                if (score < 2) {
+                    switch (answer.category) {
+                        case 'participant_protection':
+                            if (answer.answer.includes('children') || answer.answer.includes('prisoners')) {
+                                recommendations.push('Implement additional safeguards for vulnerable populations, including parental consent for minors and independent advocates for prisoners.');
+                            }
+                            break;
+                        case 'consent':
+                            if (!answer.answer.includes('Written consent')) {
+                                recommendations.push('Consider implementing a comprehensive written consent process to ensure participants fully understand the research.');
+                            }
+                            break;
+                        case 'data_protection':
+                            if (answer.answer.includes('Personal devices') || answer.answer.includes('No formal plan')) {
+                                recommendations.push('Develop a formal data security plan with encryption, access controls, and regular security audits.');
+                            }
+                            break;
+                        case 'integrity':
+                            if (!answer.answer.includes('Full disclosure')) {
+                                recommendations.push('Implement a comprehensive conflict of interest disclosure and management plan.');
+                            }
+                            break;
+                    }
+                }
+            });
+            
+            // Add general recommendations if none specific were generated
+            if (recommendations.length === 0) {
+                if (researchScore < 80) {
+                    recommendations.push('Review IRB guidelines specific to your research methodology.');
+                    recommendations.push('Consult with experienced researchers in your field about ethical considerations.');
+                    recommendations.push('Consider conducting a pilot study to identify potential ethical issues before full implementation.');
+                }
+            }
+            
+            return recommendations;
+        }
+    </script>
 </body>
 </html>
