@@ -267,13 +267,13 @@
         </div>
 
 
-        <!-- Enhanced Scenario Container -->
+        <!-- Scenario Container -->
         <div id="scenario-container" class="scenario-container hidden">
             <div id="scenario-text" class="scenario-text"></div>
             <div id="scenario-choices" class="scenario-choices"></div>
             <div id="scenario-feedback" class="scenario-feedback hidden"></div>
             <div class="scenario-controls">
-                <button id="scenario-restart" class="btn hidden">Choose Another Scenario</button>
+                <button id="scenario-another" class="btn hidden">Another Scenario</button>
                 <button id="scenario-reset" class="btn secondary hidden">Restart This Scenario</button>
             </div>
         </div>
@@ -299,8 +299,71 @@
         </div>
     </footer>
 
-    <script>
-        
+        <script>
+        // Enhanced Scenario Data
+        const scenarios = [
+            {
+                id: 1,
+                title: "Vulnerable Population Research",
+                text: "You're conducting research on educational outcomes and want to include participants from a local homeless shelter. The shelter director is enthusiastic and offers to help recruit participants. What is your first step?",
+                choices: [
+                    "Accept the director's help and start recruitment immediately",
+                    "Consult with your IRB about special protections needed",
+                    "Design a separate consent process with additional safeguards"
+                ],
+                feedback: [
+                    "This approach may create undue influence. Vulnerable populations require careful consideration of coercion risks.",
+                    "Good start! Consulting your IRB ensures you follow proper protocols for vulnerable populations.",
+                    "Proactive approach, but you should still consult your IRB before implementation."
+                ]
+            },
+            {
+                id: 2,
+                title: "Data Privacy Dilemma",
+                text: "Your research involves sensitive health data about mental health treatment. A collaborator asks for the raw dataset for their own analysis. What do you do?",
+                choices: [
+                    "Share the data since they're a collaborator",
+                    "Only share anonymized summary statistics",
+                    "Request a formal data sharing agreement through your institution"
+                ],
+                feedback: [
+                    "Risky approach. Collaborators still need proper data sharing agreements for sensitive data.",
+                    "Good practice! Summary statistics protect privacy while enabling collaboration.",
+                    "Best approach! Formal agreements ensure proper data handling and compliance."
+                ]
+            },
+            {
+                id: 3,
+                title: "Informed Consent Challenge",
+                text: "You're studying medication adherence in elderly patients. Some participants seem confused about the consent form but agree to participate. How do you proceed?",
+                choices: [
+                    "Proceed since they agreed verbally",
+                    "Use simplified consent materials and assess comprehension",
+                    "Exclude these participants from the study"
+                ],
+                feedback: [
+                    "Problematic. Verbal agreement doesn't ensure true informed consent.",
+                    "Excellent! Assessing comprehension ensures valid informed consent.",
+                    "May be appropriate but could exclude important voices. Consider enhanced consent procedures first."
+                ]
+            },
+            {
+                id: 4,
+                title: "Conflict of Interest",
+                text: "Your research is funded by a pharmaceutical company that could benefit from positive results. How do you address this in your study design?",
+                choices: [
+                    "Proceed normally - funding doesn't affect research",
+                    "Disclose the funding in all publications",
+                    "Implement blinding and independent data analysis"
+                ],
+                feedback: [
+                    "Concerning. Financial conflicts must be actively managed.",
+                    "Good start, but disclosure alone isn't sufficient management.",
+                    "Best practice! Active management through blinding and independent analysis addresses the conflict."
+                ]
+            }
+        ];
+
         // Research Assessment Questions
         const researchQuestions = [
             {
@@ -411,6 +474,9 @@
         let currentResearchQuestion = 0;
         let researchScore = 0;
         let researchAnswers = [];
+        
+        // Global variable for current scenario
+        let currentScenarioIndex = 0;
 
         // Enhanced Module Card Interactions
         document.addEventListener('DOMContentLoaded', function() {
@@ -437,69 +503,113 @@
                     link.classList.remove('active');
                 }
             });
-
-            // Load clinical trials data
-            setTimeout(loadClinicalTrialsExample, 1000);
         });
         
         // Scenario functionality
         function startScenario() {
-            // Show scenario selection
+            // Get a random scenario
+            currentScenarioIndex = Math.floor(Math.random() * scenarios.length);
+            const scenario = scenarios[currentScenarioIndex];
+            
+            // Show scenario container
             const container = document.getElementById('scenario-container');
             const researchContainer = document.getElementById('research-container');
             
             container.classList.remove('hidden');
             researchContainer.classList.add('hidden');
             
-            // For brevity, showing a simple scenario implementation
+            // Display scenario
             document.getElementById('scenario-text').innerHTML = `
-                <h3>Vulnerable Population Research</h3>
-                <p>You're conducting research on educational outcomes and want to include participants from a local homeless shelter. The shelter director is enthusiastic and offers to help recruit participants. What is your first step?</p>
+                <h3>${scenario.title}</h3>
+                <p>${scenario.text}</p>
             `;
             
-            document.getElementById('scenario-choices').innerHTML = `
-                <div class="scenario-choice" onclick="selectScenarioChoice(0)">Accept the director's help and start recruitment immediately</div>
-                <div class="scenario-choice" onclick="selectScenarioChoice(1)">Consult with your IRB about special protections needed</div>
-                <div class="scenario-choice" onclick="selectScenarioChoice(2)">Design a separate consent process with additional safeguards</div>
-            `;
+            // Display choices
+            let choicesHTML = '';
+            scenario.choices.forEach((choice, index) => {
+                choicesHTML += `<div class="scenario-choice" onclick="selectScenarioChoice(${index})">${choice}</div>`;
+            });
+            document.getElementById('scenario-choices').innerHTML = choicesHTML;
             
+            // Reset buttons
             document.getElementById('scenario-feedback').classList.add('hidden');
-            document.getElementById('scenario-restart').classList.add('hidden');
+            document.getElementById('scenario-another').classList.add('hidden');
             document.getElementById('scenario-reset').classList.remove('hidden');
         }
         
         function selectScenarioChoice(choiceIndex) {
+            const scenario = scenarios[currentScenarioIndex];
             const feedbackElement = document.getElementById('scenario-feedback');
             const choices = document.querySelectorAll('.scenario-choice');
+            const anotherButton = document.getElementById('scenario-another');
+            const resetButton = document.getElementById('scenario-reset');
             
-            // Remove any previous selections
+            // Disable further choices
             choices.forEach(choice => {
                 choice.style.pointerEvents = 'none';
             });
             
-            // Show feedback based on choice
-            if (choiceIndex === 0) {
-                feedbackElement.innerHTML = `
-                    <h4>Decision Feedback</h4>
-                    <p>This approach may create undue influence. Vulnerable populations require careful consideration of coercion risks.</p>
-                    <p class="negative-feedback">✗ This approach raises ethical concerns</p>
-                `;
-            } else if (choiceIndex === 1) {
-                feedbackElement.innerHTML = `
-                    <h4>Decision Feedback</h4>
-                    <p>Good start! Consulting your IRB ensures you follow proper protocols for vulnerable populations.</p>
-                    <p class="positive-feedback">✓ This approach aligns with ethical standards</p>
-                `;
-            } else {
-                feedbackElement.innerHTML = `
-                    <h4>Decision Feedback</h4>
-                    <p>Proactive approach, but you should still consult your IRB before implementation.</p>
-                    <p class="neutral-feedback">→ This approach has both strengths and limitations</p>
-                `;
-            }
+            // Show feedback
+            feedbackElement.innerHTML = `
+                <h4>Decision Feedback</h4>
+                <p>${scenario.feedback[choiceIndex]}</p>
+                ${choiceIndex === 1 ? 
+                    '<p class="positive-feedback">✓ This approach aligns with ethical standards</p>' :
+                    choiceIndex === 0 || choiceIndex === 2 ?
+                    '<p class="neutral-feedback">→ This approach has both strengths and limitations</p>' :
+                    '<p class="positive-feedback">✓ This is a strong ethical approach</p>'
+                }
+            `;
             
             feedbackElement.classList.remove('hidden');
-            document.getElementById('scenario-restart').classList.remove('hidden');
+            
+            // Show the "Another Scenario" button instead of "Choose Another Scenario"
+            anotherButton.classList.remove('hidden');
+            resetButton.classList.add('hidden');
+            
+            // Connect the "Another Scenario" button
+            anotherButton.onclick = getRandomScenario;
+        }
+        
+        function getRandomScenario() {
+            // Get a different random scenario
+            let newIndex;
+            do {
+                newIndex = Math.floor(Math.random() * scenarios.length);
+            } while (newIndex === currentScenarioIndex && scenarios.length > 1);
+            
+            currentScenarioIndex = newIndex;
+            const scenario = scenarios[currentScenarioIndex];
+            
+            // Reset the scenario display
+            const feedbackElement = document.getElementById('scenario-feedback');
+            const choicesElement = document.getElementById('scenario-choices');
+            const anotherButton = document.getElementById('scenario-another');
+            const resetButton = document.getElementById('scenario-reset');
+            
+            // Update scenario content
+            document.getElementById('scenario-text').innerHTML = `
+                <h3>${scenario.title}</h3>
+                <p>${scenario.text}</p>
+            `;
+            
+            // Update choices
+            let choicesHTML = '';
+            scenario.choices.forEach((choice, index) => {
+                choicesHTML += `<div class="scenario-choice" onclick="selectScenarioChoice(${index})">${choice}</div>`;
+            });
+            choicesElement.innerHTML = choicesHTML;
+            
+            // Re-enable choices
+            const choices = document.querySelectorAll('.scenario-choice');
+            choices.forEach(choice => {
+                choice.style.pointerEvents = 'auto';
+            });
+            
+            // Hide feedback and show reset button
+            feedbackElement.classList.add('hidden');
+            anotherButton.classList.add('hidden');
+            resetButton.classList.remove('hidden');
         }
         
         // Research Assessment Functionality
