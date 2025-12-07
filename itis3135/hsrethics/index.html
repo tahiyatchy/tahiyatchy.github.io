@@ -8,19 +8,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <div class="nav-brand">
-                <h1>Ethical Research Resource</h1>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="project_overview.html">This Initiative</a></li>
-                <li><a href="learn.html">Learn</a></li>
-                <li><a href="test.html">Test</a></li>
-                <li><a href="interactive.html">Interactive</a></li>
-            </ul>
-        </nav>
+    <header data-include="components/header.html">
     </header>
 
     <main class="container">
@@ -61,17 +49,10 @@
         </section>
     </main>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2025 Ethical Research Resource. For educational purposes.</p>
-            <div class="validator-links">
-                <a href="https://validator.w3.org/" target="_blank" aria-label="HTML Validator">HTML Validator</a>
-                <a href="https://jigsaw.w3.org/css-validator/" target="_blank" aria-label="CSS Validator">CSS Validator</a>
-                <a href="https://wave.webaim.org/" target="_blank" aria-label="Accessibility Checker">Accessibility Checker</a>
-            </div>
-        </div>
+    <footer data-include="components/footer.html">
     </footer>
 
+    <script src="scripts/HTMLinclude.js"></script>
     <script>
         function loadClinicalTrialsExample() {
             $.ajax({

@@ -259,7 +259,7 @@ body {
 }
 
 /* Footer */
-.footer {
+footer {
     background: #2c3e50;
     color: white;
     padding: 2rem;
@@ -282,21 +282,21 @@ body {
 }
 
 .validator-links a {
-    color: #3498db;
+    color: #77c7fd;
     text-decoration: none;
     padding: 0.5rem 1rem;
-    border: 1px solid #3498db;
+    border: 1px solid #77c7fd;
     border-radius: 4px;
     transition: all 0.3s;
 }
 
 .validator-links a:hover {
-    background: #3498db;
+    background: #77c7fd;
     color: white;
 }
 
 .validator-links a:focus {
-    outline: 3px solid #3498db;
+    outline: 3px solid #77c7fd;
     outline-offset: 2px;
 }
 

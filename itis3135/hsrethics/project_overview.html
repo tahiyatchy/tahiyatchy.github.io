@@ -5,68 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>This Initiative - Ethical Research Resource</title>
     <link rel="stylesheet" href="styles/default.css">
-    <style>
-        .module-card {
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .module-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        
-        .design-figure {
-            text-align: center;
-            margin: 20px 0;
-        }
-        
-        .design-image {
-            max-width: 100%;
-            border: 1px solid #dee2e6;
-            border-radius: 8px;
-        }
-        
-        .client-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin: 20px 0;
-        }
-        
-        .info-item {
-            background-color: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            border-left: 4px solid #007bff;
-        }
-
-        .lazy-section {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        .lazy-section.loaded {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
+    <link rel="stylesheet" href="styles/project_overview.css">
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <div class="nav-brand">
-                <h1>Ethical Research Resource</h1>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="project_overview.html" class="active">This Initiative</a></li>
-                <li><a href="learn.html">Learn</a></li>
-                <li><a href="test.html">Test</a></li>
-                <li><a href="interactive.html">Interactive</a></li>
-            </ul>
-        </nav>
+    <header data-include="components/header.html">
     </header>
 
     <main class="container">
@@ -110,14 +52,14 @@
 <h4>Layout</h4>
 <br>
 <figure>
-    <img src="images/sitemap.png" style="margin-left: 15%;">
+    <img src="images/sitemap.png" style="margin-left: 15%;" alt="site map">
     <figcaption style="text-align: center;">
         Site Map created with <a href="https://www.gloomaps.com/">Gloomaps</a>
     </figcaption>
 </figure>
 <br><br>
 <figure>
-    <img src="images/wireframe.png" style="margin-left: 15%;">
+    <img src="images/wireframe.png" style="margin-left: 15%;" alt="site design wireframe">
     <figcaption style="text-align: center;">
         Wireframe created with draw.io. Access file <a href="https://drive.google.com/file/d/1PsW5_-Ewu9lH7bA1pQ811kwUYaNUvmbL/view?usp=sharing">here.</a>
     </figcaption>
@@ -204,25 +146,17 @@
     <h4>Example Sites</h4>
     <p>
         The following sites serve as the main inspiration and reference for the central interactive quiz functionality implemented here:
-        <ul>
+    </p>
+    <ul>
             <li><a href="https://www.thegreencardgame.com/">Green Card Game</a></li>
             <li><a href="https://en.akinator.com/">Akinator</a></li>
         </ul>
-    </p>
         </section>
     </main>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2025 Ethical Research Resource. For educational purposes.</p>
-            <div class="validator-links">
-                <a href="https://validator.w3.org/" target="_blank" aria-label="HTML Validator">HTML Validator</a>
-                <a href="https://jigsaw.w3.org/css-validator/" target="_blank" aria-label="CSS Validator">CSS Validator</a>
-                <a href="https://wave.webaim.org/" target="_blank" aria-label="Accessibility Checker">Accessibility Checker</a>
-            </div>
-        </div>
+    <footer data-include="components/footer.html">
     </footer>
-
+    <script src="scripts/HTMLinclude.js"></script>
     <script>
         // Set active navigation link
         document.addEventListener('DOMContentLoaded', function() {
