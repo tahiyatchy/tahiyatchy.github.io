@@ -1,0 +1,273 @@
+
+// ===== FUNCTION DEFINITIONS =====
+
+// Quiz Data
+const quizData = {
+    belmont: [
+        {
+            question: "Which Belmont Report principle requires that participants provide voluntary, informed consent?",
+            options: [
+                "Respect for Persons",
+                "Beneficence", 
+                "Justice",
+                "Fidelity"
+            ],
+            correct: 0,
+            explanation: "Respect for Persons requires acknowledging autonomy and protecting those with diminished autonomy through informed consent."
+        },
+        {
+            question: "The principle of Justice in the Belmont Report primarily addresses:",
+            options: [
+                "Fair selection of research subjects",
+                "Maximizing benefits to researchers",
+                "Quick approval of research protocols",
+                "Financial compensation for participants"
+            ],
+            correct: 0,
+            explanation: "Justice ensures the fair distribution of the benefits and burdens of research, including fair subject selection."
+        },
+        {
+            question: "Which principle emphasizes maximizing benefits and minimizing harms?",
+            options: [
+                "Respect for Persons",
+                "Beneficence",
+                "Justice",
+                "Non-maleficence"
+            ],
+            correct: 1,
+            explanation: "Beneficence requires researchers to maximize possible benefits and minimize possible harms to research participants."
+        }
+    ],
+    coi: [
+        {
+            question: "A researcher stands to gain financially if their study shows positive results. This represents:",
+            options: [
+                "A conflict of interest",
+                "Standard research practice", 
+                "Academic freedom",
+                "Research efficiency"
+            ],
+            correct: 0,
+            explanation: "Financial conflicts of interest occur when researchers have financial stakes that could influence their research conduct or outcomes."
+        },
+        {
+            question: "What is the primary purpose of disclosing conflicts of interest?",
+            options: [
+                "To eliminate all potential biases",
+                "To increase research funding opportunities",
+                "To maintain transparency and manage potential biases",
+                "To satisfy administrative requirements"
+            ],
+            correct: 2,
+            explanation: "Disclosure allows for appropriate management of conflicts rather than necessarily eliminating them, maintaining research integrity."
+        }
+    ],
+    irb: [
+        {
+            question: "Which type of IRB review is required for research involving more than minimal risk?",
+            options: [
+                "Full Board Review",
+                "Expedited Review",
+                "Exempt Review",
+                "No review required"
+            ],
+            correct: 0,
+            explanation: "Research involving more than minimal risk requires Full Board Review by the complete IRB committee."
+        },
+        {
+            question: "What is the primary responsibility of an Institutional Review Board?",
+            options: [
+                "To ensure research is scientifically valid",
+                "To protect the rights and welfare of human subjects",
+                "To secure research funding",
+                "To publish research findings"
+            ],
+            correct: 1,
+            explanation: "The IRB's primary mandate is to protect the rights, welfare, and well-being of research participants."
+        }
+    ],
+    data: [
+        {
+            question: "What is the primary purpose of data de-identification in research?",
+            options: [
+                "Protect participant confidentiality",
+                "Make data analysis easier",
+                "Reduce storage costs",
+                "Meet publication requirements"
+            ],
+            correct: 0,
+            explanation: "De-identification protects participant confidentiality by removing personally identifiable information."
+        },
+        {
+            question: "Which data security measure is most critical for protecting sensitive research data?",
+            options: [
+                "Regular data backups",
+                "Strong encryption protocols",
+                "Frequent password changes",
+                "Physical security of devices"
+            ],
+            correct: 1,
+            explanation: "Encryption provides the strongest protection for data both at rest and in transit, preventing unauthorized access."
+        }
+    ]
+};
+
+// Global variables for quiz
+let currentQuiz = null;
+let currentQuestion = 0;
+let score = 0;
+
+// Quiz functionality for test.html
+function startQuiz(quizType) {
+    currentQuiz = quizType;
+    currentQuestion = 0;
+    score = 0;
+    
+    const container = document.getElementById('quiz-container');
+    const questionElement = document.getElementById('quiz-question');
+    const optionsElement = document.getElementById('quiz-options');
+    const nextButton = document.getElementById('quiz-next');
+    const resultElement = document.getElementById('quiz-result');
+    const progressElement = document.getElementById('quiz-progress');
+    
+    container.classList.remove('hidden');
+    resultElement.classList.add('hidden');
+    nextButton.classList.add('hidden');
+    
+    showQuestion();
+}
+
+function showQuestion() {
+    const questions = quizData[currentQuiz];
+    if (currentQuestion < questions.length) {
+        const question = questions[currentQuestion];
+        const progressElement = document.getElementById('quiz-progress');
+        const questionElement = document.getElementById('quiz-question');
+        const optionsElement = document.getElementById('quiz-options');
+        const nextButton = document.getElementById('quiz-next');
+        
+        progressElement.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+        questionElement.textContent = question.question;
+        
+        optionsElement.innerHTML = '';
+        question.options.forEach((option, index) => {
+            const button = document.createElement('div');
+            button.className = 'quiz-option';
+            button.textContent = option;
+            button.onclick = () => selectAnswer(index);
+            optionsElement.appendChild(button);
+        });
+        
+        nextButton.classList.add('hidden');
+    } else {
+        showQuizResult();
+    }
+}
+
+function selectAnswer(selectedIndex) {
+    const questions = quizData[currentQuiz];
+    const question = questions[currentQuestion];
+    const options = document.querySelectorAll('.quiz-option');
+    const nextButton = document.getElementById('quiz-next');
+    const resultElement = document.getElementById('quiz-result');
+    
+    // Disable all options after selection
+    options.forEach(option => {
+        option.style.pointerEvents = 'none';
+    });
+    
+    // Mark correct and incorrect answers
+    options.forEach((option, index) => {
+        if (index === question.correct) {
+            option.classList.add('correct');
+        } else if (index === selectedIndex && index !== question.correct) {
+            option.classList.add('incorrect');
+        }
+    });
+    
+    // Update score
+    if (selectedIndex === question.correct) {
+        score++;
+        resultElement.innerHTML = `<strong>Correct!</strong> ${question.explanation}`;
+        resultElement.className = 'quiz-result';
+        resultElement.style.backgroundColor = '#d4edda';
+        resultElement.style.borderLeft = '4px solid #28a745';
+    } else {
+        resultElement.innerHTML = `<strong>Incorrect.</strong> ${question.explanation}`;
+        resultElement.className = 'quiz-result';
+        resultElement.style.backgroundColor = '#f8d7da';
+        resultElement.style.borderLeft = '4px solid #dc3545';
+    }
+    
+    resultElement.classList.remove('hidden');
+    nextButton.classList.remove('hidden');
+}
+
+function nextQuestion() {
+    currentQuestion++;
+    showQuestion();
+}
+
+function showQuizResult() {
+    const container = document.getElementById('quiz-container');
+    const questionElement = document.getElementById('quiz-question');
+    const optionsElement = document.getElementById('quiz-options');
+    const nextButton = document.getElementById('quiz-next');
+    const resultElement = document.getElementById('quiz-result');
+    const progressElement = document.getElementById('quiz-progress');
+    
+    questionElement.textContent = '';
+    optionsElement.innerHTML = '';
+    nextButton.classList.add('hidden');
+    progressElement.textContent = '';
+    
+    const percentage = (score / quizData[currentQuiz].length) * 100;
+    let message = '';
+    
+    if (percentage >= 80) {
+        message = 'Excellent! You have a strong understanding of this topic.';
+    } else if (percentage >= 60) {
+        message = 'Good job! Review the materials to improve your understanding.';
+    } else {
+        message = 'Consider reviewing the learning materials and trying again.';
+    }
+    
+    resultElement.innerHTML = `
+        <h3>Quiz Complete!</h3>
+        <p>Your score: ${score} out of ${quizData[currentQuiz].length} (${percentage.toFixed(1)}%)</p>
+        <p>${message}</p>
+        <button class="btn" onclick="startQuiz('${currentQuiz}')" style="margin-top: 15px;">Retake Quiz</button>
+    `;
+    resultElement.classList.remove('hidden');
+    resultElement.style.backgroundColor = '#e7f3ff';
+    resultElement.style.borderLeft = '4px solid #007bff';
+}
+
+// ===== EVENT LISTENERS AND INITIALIZATION =====
+
+// Enhanced Module Card Interactions
+document.addEventListener('DOMContentLoaded', function() {
+    const moduleCards = document.querySelectorAll('.module-card');
+    
+    // Add click tracking and visual feedback
+    moduleCards.forEach(card => {
+        card.addEventListener('click', function() {
+            // Add visual feedback
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 200);
+        });
+    });
+    
+    // Set active navigation link
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const navLinks = document.querySelectorAll('.nav-menu a');
+    navLinks.forEach(link => {
+        if (link.getAttribute('href') === currentPage) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
+});
